@@ -13,7 +13,7 @@ Finally i try to use natural Information (kind of that way the radiologist look 
 
 (1) - Visualize filters <br />
 (2) - Visualize activationmaps <br />
-(3) - Occluding Experiments <br />
+(3) - Occluding experiments <br />
 (4) - Attentionmaps <br />
 (5) - Deconvolution <br />
 
