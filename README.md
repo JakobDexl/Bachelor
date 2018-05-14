@@ -1,5 +1,8 @@
 # Bachelor Draft
 
+![Learning](https://github.com/JakobDexl/Bachelor/blob/master/Test_visulizations/stack2.gif) <br />
+Something nice looking is to make a activaton.gif <br />
+during the training process 
 ## Goals
 
 I try to understand whats going on in a CNN model for Brain Mri images (and to use this informaton to make better models) <br />
@@ -39,7 +42,5 @@ Neural Network Decisions. Prediction Difference Analysis, 15.02.2017](http://arx
 
 - [Data Preprocessing](http://cs231n.github.io/neural-networks-2/) <br />
 
-### Something nice looking is to make a activaton.gif during the training process 
 
-![Learning](https://github.com/JakobDexl/Bachelor/blob/master/Test_visulizations/stack2.gif)
 
