@@ -1,8 +1,8 @@
 # Bachelor Draft
 
 ![Learning](https://github.com/JakobDexl/Bachelor/blob/master/Test_visulizations/stack2.gif) <br />
-Something nice looking is to make a activaton.gif <br />
-during the training process 
+*Something nice looking is to make a activaton.gif <br />
+during the training process*
 ## Goals
 
 I try to understand whats going on in a CNN model for Brain Mri images (and to use this informaton to make better models) <br />
