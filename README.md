@@ -2,9 +2,9 @@
 
 ## Goals:
 
-I try to understand whats going on in a CNN model for Brain Mri images (and to use this informaton to make better models)
-I try out visulization techniques and make them easy accesible for keras models
-Finally i try to use natural Information (kind of that way the radiologist look at the pictures) for tuning models 
+I try to understand whats going on in a CNN model for Brain Mri images (and to use this informaton to make better models) 
+I try out visulization techniques and make them easy accesible for keras models 
+Finally i try to use natural Information (kind of that way the radiologist look at the pictures) for tuning models  
 
 ## Common ways to investigate a model:
 
