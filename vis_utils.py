@@ -17,10 +17,10 @@ from keras import backend as K
 import matplotlib.pylab as plt
 
 def load_2d(img_path, t_size):
-    if len(t_size) is 1:
-        t_size = t_size, t_size
+#    if not isinstance(t_size, tuple):
+#        t_size = t_size, t_size
     
-    img = image.load_img(img_path, target_size=(t_size))
+    img = image.load_img(img_path, target_size=(t_size, t_size))
     img = image.img_to_array(img)
     img /= 255.
     img = img[:, :, 0]
@@ -199,63 +199,6 @@ def normalize(x):
     # utility function to normalize a tensor by its L2 norm
     return x / (K.sqrt(K.mean(K.square(x))) + K.epsilon())
 
-def n_max(model, img=None, filter_index=0, layer_name='conv2d_1'):     
-
-    #layer_name = 'conv2d_18'
-    #filter_index = 0 
-    
-    img_height = 128
-    img_width = 128
-    channel = 1
-    
-    iterations = 40
-    step_size = 1
-    
-    # get the symbolic outputs of each "key" layer (we gave them unique names).
-    layer_dict = dict([(layer.name, layer) for layer in model.layers])
-    input_img = model.input
-
-    # build a loss function that maximizes the activation
-    # of the nth filter of the layer considered
-    layer_output = layer_dict[layer_name].output
-    if K.image_data_format() == 'channels_first':
-        loss = K.mean(layer_output[:, filter_index, :, :])
-    else:
-        loss = K.mean(layer_output[:, :, :, filter_index])
-    # compute the gradient of the input picture wrt this loss
-    grads = K.gradients(loss, input_img)[0]
-
-    # normalization trick: we normalize the gradient
-    # grads /= (K.sqrt(K.mean(K.square(grads))) + 1e-5)
-    grads = normalize(grads)
-    
-    # this function returns the loss and grads given the input picture
-    iterate = K.function([input_img], [loss, grads])
-
-    # we start from a gray image with some noise
-    if img is not None:
-        input_img_data = img
-    else: 
-        if K.image_data_format() == 'channels_first':
-            input_img_data = np.random.random((1, channel, img_width, img_height))
-        else:
-            input_img_data = np.random.random((1, img_width, img_height, channel))
-        input_img_data = (input_img_data - 0.5) * 20 + 128
-        
-    # run gradient ascent for 20 steps
-    for i in range(iterations):
-        loss_value, grads_value = iterate([input_img_data])
-        input_img_data += grads_value * step_size
-        
-        print('\r\rCurrent loss value:%.3f , filter: %d ' % (loss_value, filter_index), end='')
-        if loss_value <= 0. and i >2:
-            # some filters get stuck to 0, we can skip them
-            print('break')
-            break
-
-    img = input_img_data[0]
-    img = deprocess_image(img)
-    return img[:,:,0]
 
 def multi_act(model):
 #    normal=load_2d('OASIS/Test/predict/normal.png', 128)

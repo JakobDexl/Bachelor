@@ -10,7 +10,7 @@ from keras import models
 from keras import backend as K
 import numpy as np
 
-import os
+
 from copy import deepcopy
 
 import vis_utils as vu
@@ -53,7 +53,66 @@ def cam(model, img_tensor):
     heatmap /= np.max(heatmap)
     plt.matshow(heatmap)
     return heatmap
- 
+
+def gradient_ascent(model, img=None, filter_index=0, layer_name=None):
+    
+    img_h = model.input_shape[1]
+    img_w = model.input_shape[2]
+    channel = 1
+    
+    iterations = 100
+    step_size = 1
+    
+    if layer_name is None:
+        last_conv = lambda x: vu.count_same(x, 'conv') [-2] [-1]
+        layer_name = last_conv(model)
+    
+    # get the symbolic outputs of each "key" layer (we gave them unique names).
+    layer_dict = dict([(layer.name, layer) for layer in model.layers])
+    input_img = model.input
+
+    # build a loss function that maximizes the activation
+    # of the nth filter of the layer considered
+    layer_output = layer_dict[layer_name].output
+    if K.image_data_format() == 'channels_first':
+        loss = K.mean(layer_output[:, filter_index, :, :])
+    else:
+        loss = K.mean(layer_output[:, :, :, filter_index])
+    # compute the gradient of the input picture wrt this loss
+    grads = K.gradients(loss, input_img)[0]
+
+    # normalization trick: we normalize the gradient
+    # grads /= (K.sqrt(K.mean(K.square(grads))) + 1e-5)
+    grads = vu.normalize(grads)
+    
+    # this function returns the loss and grads given the input picture
+    iterate = K.function([input_img], [loss, grads])
+
+    # we start from a gray image with some noise
+    if img is not None:
+        input_img_data = img
+    else: 
+        if K.image_data_format() == 'channels_first':
+            input_img_data = np.random.random((1, channel, img_h, img_w))
+        else:
+            input_img_data = np.random.random((1, img_h, img_w, channel))
+        input_img_data = (input_img_data - 0.5) * 20 + 128
+        
+    # run gradient ascent for 20 steps
+    for i in range(iterations):
+        loss_value, grads_value = iterate([input_img_data])
+        input_img_data += grads_value * step_size
+        
+        print('\r\rCurrent loss value:%.3f , filter: %d ' % (loss_value, filter_index), end='')
+        if loss_value <= 0. and i >2:
+            # some filters get stuck to 0, we can skip them
+            print('break')
+            break
+
+    img = input_img_data[0]
+    img = vu.deprocess_image(img)
+    return img[:,:,0]
+
 def occlusion(model, img_tensor, stride=None, kernel=None, plot=True):
 
     size = img_tensor.shape[1]
