@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Apr 26 21:19:43 2018
-
+Contains Model_explorer class. This class provides an easy investigation tool for a keras sequential models.
 @author: jakpo_000
 """
 
@@ -17,7 +17,7 @@ from debug import DEBUG
 
 class Model_explorer():
     """
-    layer layer_max, weights get/set, input tensor
+    Init with model or path to .h5 file 
     """
     def __init__(self, arg):
 
@@ -41,6 +41,9 @@ class Model_explorer():
         self.tensor = vu.to_tensor(self.img)
         
     def filters(self):
+        """
+        shows the first conv layer kernels
+        """
         vc.filters(self.model)
         
     def activations(self):
