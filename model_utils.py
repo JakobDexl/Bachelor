@@ -6,7 +6,7 @@ Created on Sat May 12 10:46:03 2018
 @author: jakob
 """
 from keras.callbacks import Callback, TensorBoard, LambdaCallback
-from feature_rank import to_tensor, load_2d
+from vis_utils import to_tensor, load_2d
 from keras import models
 import math
 import numpy as np
@@ -19,7 +19,7 @@ class CustomCallback(Callback):
     class activationHistory(Callback):
             def __init__(self, shape, img_path='OASIS/Test/predict/anormal.png'):
                 self.batch_activations_model = []
-                img = load_2d(img_path, shape)
+                img = load_2d(img_path, (shape))
                 self.img_tensor = to_tensor(img) 
             def on_batch_end(self, batch, logs={}):
                 with Ki.tf.device('/cpu:0'):
@@ -50,7 +50,7 @@ def make_gif(stack, layer_to_vis=0):
     
     print('start model_acti_gif')
     
-    writer = imageio.get_writer('stack11.gif', mode='I', loop=1)
+    writer = imageio.get_writer('normlayer.gif', mode='I', loop=1)
     shape = stack[0][layer_to_vis].shape[-2]
     features = stack[0][layer_to_vis].shape[-1]
     m = math.ceil(math.sqrt(features))
