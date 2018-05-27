@@ -3,6 +3,14 @@
 ![Learning](https://github.com/JakobDexl/Bachelor/blob/master/Test_visulizations/stack2.gif) <br />
 *Something nice looking is to make a activaton.gif <br />
 during the training process*
+
+## Purpose
+The number of prescribed CT and MR admissions is continuously increasing [Statista](https://github.com/JakobDexl/Bachelor/blob/master/Test_visulizations/statistic_id172719_ct-und-mrt---untersuchungszahlen.png). This often leaves radiologists with little time per scan. In addition, internal studies have shown that most of the findings are normal. This correlation suggests to support physicians with a pre-classification tool. 
+Such a tool that assists the Radiologist in classifying brain MRI images into normal and abnormal should be transparent and be able to justify its answers. This is necessary to meet the high standards of medical technologies.
+State of the art results in this area could be achieved through good feature engineering and machine learning models ().
+This requires a lot of mathematical and medical knowledge. In the last few years deep learning models have become popular. These won numerous classification competitions and beat classic feature engineering (reference). These models automatically extract features based on a data set. Recent papers try to use this potential for medicine as well (ref).  
+Problems that occur here are the low amount of data available. Furthermore, the high heterogeneity of this data and the loss of transparency due to the low control of feature extraction.
+
 ## Goals
 
 I try to understand whats going on in a CNN model for Brain Mri images (and to use this informaton to make better models) <br />
