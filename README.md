@@ -22,6 +22,12 @@ These objectives create more transparency and justify classification results.
 
 ## Theory
 ### Pathologies
+#### Tumors
+#### Neurodegenerative diseases
+#### Vascular diseases 
+#### Trauma
+#### Multiple sclerosis
+#### Infections
 ### Natural learning
 ### Machine learning
 ### CNN
