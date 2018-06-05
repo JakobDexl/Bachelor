@@ -13,7 +13,7 @@ setup(name='bachelor',
                         'nibabel>=2.2.1',
                         'tensorflow==1.1.0',
                         'keras==2.1.5',
-                        'opencv==3.3.1',
+                        'opencv',
                         'SimpleITK>=1.1.0'],
       packages=['vis_keras'],
       zip_safe=False)
