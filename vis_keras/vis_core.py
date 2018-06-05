@@ -13,7 +13,7 @@ import numpy as np
 
 from copy import deepcopy
 
-import vis_utils as vu
+from . import vis_utils as vu
 
 def activations(model, img_tensor):
     
