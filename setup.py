@@ -2,7 +2,7 @@ from setuptools import setup
 from setuptools import find_packages
 
 setup(name='bachelor',
-      version='0.1',
+      version='0.0.1',
       description='Code and tests for thesis',
       url='http://github.com/JakobDexl',
       download_url='http://github.com/JakobDexl/Bachelor',
