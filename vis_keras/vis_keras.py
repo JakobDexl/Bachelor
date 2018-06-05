@@ -12,8 +12,8 @@ for a keras sequential models.
 from keras.models import load_model
 import matplotlib.pyplot as plt
 import numpy as np
-import vis_core as vc
-import vis_keras.vis_utils as vu
+from . import vis_core as vc
+from . import vis_keras.vis_utils as vu
 # from debug import DEBUG
 import os
 
