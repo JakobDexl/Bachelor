@@ -13,7 +13,7 @@ from keras.models import load_model
 import matplotlib.pyplot as plt
 import numpy as np
 from . import vis_core as vc
-from . import vis_keras.vis_utils as vu
+from . import vis_utils as vu
 # from debug import DEBUG
 import os
 
