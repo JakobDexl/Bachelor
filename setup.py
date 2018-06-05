@@ -17,4 +17,7 @@ setup(name='bachelor',
                         'keras==2.1.5',
                         'SimpleITK>=1.1.0'],
       packages=find_packages(),
+      classifiers=[
+        "Development Status :: 2 - Pre-Alpha",
+        "Topic :: Utilities"]
       zip_safe=False)
