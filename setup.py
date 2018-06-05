@@ -1,4 +1,5 @@
 from setuptools import setup
+from setuptools import find_packages
 
 setup(name='bachelor',
       version='0.1',
@@ -15,5 +16,5 @@ setup(name='bachelor',
                         'tensorflow==1.1.0',
                         'keras==2.1.5',
                         'SimpleITK>=1.1.0'],
-      packages=['vis_keras','vis_utils'],
+      packages=find_packages(),
       zip_safe=False)
