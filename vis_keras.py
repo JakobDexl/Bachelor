@@ -34,11 +34,23 @@ class Model_explorer():
             print('input not supported! Init with Sequential or path to *.h5 Sequential')
             return    
         
+        self.input_shape = self.model.input_shape
+        self.summary() = self.model.summary()
+        
     #def _get_weights_bias(model):
     def set_test_image(self, img_path):
-        t_size = self.model.input_shape[2], self.model.input_shape[-2]
-        self.img = vu.load_2d(img_path, t_size)
-        self.tensor = vu.to_tensor(self.img)
+        if len(self.input_shape) is 4:
+            
+            t_size = self.input_shape[1], self.input_shape[2]
+            self.img = vu.load_2d(img_path, t_size)
+            self.tensor = vu.to_tensor(self.img)
+        
+        elif len(self.input_shape) is 5:
+             
+            t_size = self.input_shape[1], self.input_shape[2], self.input_shape[3]
+            self.img = vu.load_2d(img_path, t_size)
+            self.tensor = vu.to_tensor(self.img)
+            
         
     def filters(self):
         """
