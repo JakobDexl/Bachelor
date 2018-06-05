@@ -24,9 +24,19 @@ These objectives create more transparency and justify classification results.
 ### Pathologies
 #### Tumors
 #### Neurodegenerative diseases
+"Neurodegeneration is the progressive loss of structure or function of neurons, including death of neurons". This results in dementia or motorical mafunctions. [[wiki]](https://en.wikipedia.org/wiki/Neurodegeneration)
+##### Alzheimer (AD)
+So-called plaques form in the brain. Possible causes currently under discussion are the amyloid and the
+Neurofibril bundle hypothesis. The former names fragments of a metaprotein from the cell membrane of the nerve cells. These are deposited between the nerve cells and form lumps. The second treats structural proteins of the cell skeleton which increasingly store together and block transport processes. Both problems cause the death of cells so that the brain loses mass. This is particularly noticeable in the form of dementia if parts of the hippocampus or the frontal brain are affected. In mrt the dying of the neurons becomes visible, the free space between the sulci and the ventricles become larger (Beck et al. 2018, 225 f.). <br /> 
+
+![AD_picture](https://media.springernature.com/full/springer-static/image/art%3A10.1186%2Falzrt47/MediaObjects/13195_2010_Article_30_Fig2_HTML.jpg)
+*(1) "Progressive atrophy (medial temporal lobes) in an older cognitively normal (CN) subject, an amnestic mild cognitive impairment (aMCI) subject, and an Alzheimer's disease (AD) subject."*
+##### Morbus Parkinson
+##### Multiple sclerosis (MS)
+##### Amyotrophe Lateralsklerose (ALS)
 #### Vascular diseases 
 #### Trauma
-#### Multiple sclerosis
+#### 
 #### Infections
 ### Natural learning
 ### Machine learning
@@ -68,6 +78,11 @@ Networks, 28.11.2013](http://arxiv.org/pdf/1311.2901) (5) <br />
 - [Zintgraf, Luisa M.; Cohen, Taco S.; Adel, Tameem; Welling, Max (2017): Visualizing Deep
 Neural Network Decisions. Prediction Difference Analysis, 15.02.2017](http://arxiv.org/pdf/1702.04595) (4) <br />
 
+### Books
+
+- Chollet, François (2018): Deep learning with Python. Shelter Island, NY: Manning Publications Co.
+- Beck, Henning; Anastasiadou, Sofia; Meyer zu Reckendorf, Christopher (2018): Faszinierendes Gehirn. Berlin, Heidelberg: Springer Berlin Heidelberg.
+
 ### Blogs
 
 - [Understanding and Visualizing Convolutional Neural Networks ](http://cs231n.github.io/understanding-cnn/) (1,2,3,4,5) <br />
@@ -80,5 +95,8 @@ Neural Network Decisions. Prediction Difference Analysis, 15.02.2017](http://arx
 
 - [Data Preprocessing](http://cs231n.github.io/neural-networks-2/) <br />
 
+### Illustration directory
+(1) Thanks to Dr. Vemuri for her permission to took the Image out of this work
+ [Vemuri, Prashanthi; Jack, Clifford R. (2010): Role of structural MRI in Alzheimer's disease. In: Alzheimer's Research & Therapy 2 (4), S. 23. DOI: 10.1186/alzrt47.](https://alzres.biomedcentral.com/articles/10.1186/alzrt47)
 
 
