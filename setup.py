@@ -19,5 +19,5 @@ setup(name='bachelor',
       packages=find_packages(),
       classifiers=[
         "Development Status :: 2 - Pre-Alpha",
-        "Topic :: Utilities"]
+        "Topic :: Utilities"],
       zip_safe=False)
