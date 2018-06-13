@@ -13,11 +13,8 @@ setup(name='bachelor',
                         'scipy>=1.0.1',
                         'matplotlib>=2.2.2',
                         'nibabel>=2.2.1',
-                        'tensorflow>=1.1.0',
-                        'keras>=2.1.5',
+                        'tensorflow==1.1.0',
+                        'keras==2.1.5',
                         'SimpleITK>=1.1.0'],
       packages=find_packages(),
-      classifiers=[
-        "Development Status :: 2 - Pre-Alpha",
-        "Topic :: Utilities"],
       zip_safe=False)
