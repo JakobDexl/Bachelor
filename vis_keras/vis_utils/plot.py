@@ -41,11 +41,11 @@ def plot_stack(liste, cmap='viridis'):
     length = len(liste)
     x = 5
     y = (length//x)+1
-
     plt.figure(figsize=(11, y+(y)))
+    liste = normalize(liste)
     for c in range(length):
         plt.subplot(y, x, c+1)
-        plt.imshow(liste[c], cmap)
+        plt.imshow(liste[c], cmap, clim=(np.min(liste), np.max(liste)))
         plt.title('%s von %s' % (c+1, length))
         plt.xticks([])
         plt.yticks([])
@@ -88,7 +88,7 @@ def superimpose(heatmap, img_path, save=True, name='Heatmap'):
     heatmap = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET)
     superimposed = heatmap * 0.4 + img
     # if save:
-    cv2.imwrite('G:/%s.jpg' % name, superimposed)
+    cv2.imwrite('/home/jakob/bachelor/Tests/grad_Cam/2D_Phantom/Data/%s.jpg' % name, superimposed)
     # plt.imshow(superimposed)
 
 
@@ -107,8 +107,13 @@ https://matplotlib.org/gallery/mplot3d/bars3d.html#sphx-glr-gallery-mplot3d-bars
 
 def normalize(arr):
     arr_min = np.min(arr)
-    return (arr-arr_min)/(np.max(arr)-arr_min)
-
+    tmp1 = (arr-arr_min)
+    tmp2 = (np.max(arr)-arr_min)
+    if tmp2 == 0:
+        return arr
+    else:
+        erg = tmp1 / tmp2
+        return erg
 
 def show_histogram(values):
     n, bins, patches = plt.hist(values.reshape(-1), 50, normed=1)

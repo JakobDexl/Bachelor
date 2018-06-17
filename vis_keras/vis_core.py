@@ -27,17 +27,25 @@ def activations(model, img_tensor):
     return activations
 
 
-def grad_cam(model, img_tensor):
+def grad_cam(model, img_tensor, class_arg=None, class_names=None, out='pos'):
 
+    # Decide 2D/3D and predict output
     tensor_len = len(model.input_shape)
     preds = model.predict(img_tensor)
-    number = np.argmax(preds[0])
 
+    # Decide calculation in regard to which class, default highest prediction
+    if class_arg is None:
+        number = np.argmax(preds)
+    else:
+        number = class_arg
+
+    # Get output tensor for specified class, find last conv layer name
     brain_output = model.output[:, number]
     last_conv = lambda x: vu.model_helper.count_same(x, 'conv') [-2] [-1]
     last_conv_name = last_conv(model)
     last_conv_layer = model.get_layer(last_conv_name)
 
+    # Get gradient tensor (per channel), mean to get gradient for each map
     grads = K.gradients(brain_output, last_conv_layer.output)[0]
 
     if tensor_len is 4:
@@ -46,12 +54,17 @@ def grad_cam(model, img_tensor):
     if tensor_len is 5:
         pooled_grads = K.mean(grads, axis=(0, 1, 2, 3))
 
+    # Provide access to grads and activationmap, get feature len
     iterate = K.function([model.input],
                          [pooled_grads, last_conv_layer.output[0]])
 
     pooled_grads_value, conv_layer_output_value = iterate([img_tensor])
+    # return pooled_grads_value, conv_layer_output_value
+    pre_out = deepcopy(conv_layer_output_value)
+
     features = last_conv_layer.output.shape[-1].value
 
+    # Weighing every activationmap with its gradient, mean all maps
     if tensor_len is 4:
         for i in range(features):
             conv_layer_output_value[:, :, i] *= pooled_grads_value[i]
@@ -60,9 +73,31 @@ def grad_cam(model, img_tensor):
             conv_layer_output_value[:, :, :, i] *= pooled_grads_value[i]
 
     heatmap = np.mean(conv_layer_output_value, axis=-1)
-    heatmap = np.maximum(heatmap, 0)
-    heatmap /= np.max(heatmap)
-    # plt.matshow(heatmap)
+
+    # Test cases to force a division by zero
+    test = np.mean(np.abs(heatmap))
+
+    eps = 1e-25
+    if class_names is None:
+        print('arg: %i, pred:%.e,' % (number,preds[0][0]), end='')
+    else:
+        print('arg_high: %8s, pred:%37s,' % (class_names[number], preds),
+              end='')
+    if test > 0:
+        if out is 'pos':
+            heatmap = np.maximum(heatmap, 0)
+            heatmap /= np.max(heatmap)+eps
+            print('pos, mean:%.e' % np.mean(heatmap))
+        if out is 'neg':
+            heatmap = np.minimum(heatmap, 0)
+            heatmap /= np.min(heatmap)-eps
+            print('neg, mean: %.e' % np.mean(heatmap))
+
+    if test == 0:
+        print('Heatmap is empty; sum pooled_grads: %i; sum layer out: %i' %
+              (np.sum(pooled_grads_value), np.sum(pre_out)))
+
+    heatmap = vu.preprocess.np_normalize(heatmap)
     return heatmap
 
 
@@ -163,66 +198,91 @@ def gradient_ascent(model, img=None, filter_index=0, layer_name=None,
     return img
 
 
-def occlusion(model, img_tensor, stride=None, kernel=None, plot=True):
+def occlusion(model, img_tensor, stride=None, kernel=None, k_value=0):
 
-    size = img_tensor.shape[1]
+    if not vu.model_helper.model_tensor_test(model, img_tensor):
+        print('Failed: Model/tensor shape not same')
+        return
 
-# test odd/even !!! -->warning
-    # calculate standard kernel and size if not is set
-    if kernel is None:
-        kernel = int(size//2)
-    if stride is None:
-        stride = int(size//2)
+    if vu.model_helper.model_indim(model) is 2:
+        if not isinstance(kernel, tuple):
+            kernel = (kernel, kernel)
+        img_shape = img_tensor[0, :, :, 0].shape
 
-    # calculate the number of testimages produced
-    n = int(((size-kernel)/stride)+2)
-    l = int(n*n)
+        if not vu.model_helper.kernel_stride_test(kernel, stride, img_shape):
+            print('Failed! Kernel, stride, image size error')
+            print('Possibe combinations are:')
+            vu.model_helper.possible_kernel_stride(img_shape, kernel)
+            return
 
-    # load test_image, get sizes
+        # calculate the number of testimages produced
+        n_x = int(((img_shape[0]-kernel[0])/stride)+1)
+        n_y = int(((img_shape[1]-kernel[1])/stride)+1)
+        n_z = 1
+        num_occ = int(n_x*n_y)
+        reshape_vec = (n_x, n_y)
 
-    img_h = img_tensor.shape[1]
-    img_w = img_tensor.shape[2]
+
+    if vu.model_helper.model_indim(model) is 3:
+        if not isinstance(kernel, tuple):
+            kernel = (kernel, kernel, kernel)
+        img_shape = img_tensor[0,:,:,:,0].shape
+
+        if not vu.model_helper.kernel_stride_test(kernel, stride, img_shape):
+            print('Failed! Kernel, stride, image size error')
+            print('Possibe combinations are:')
+            vu.model_helper.possible_kernel_stride(img_shape, kernel)
+            return
+
+        # calculate the number of test images beeing produced
+        n_x = int(((img_shape[0]-kernel[0])/stride)+1)
+        n_y = int(((img_shape[1]-kernel[1])/stride)+1)
+        n_z = int(((img_shape[2]-kernel[2])/stride)+1)
+        num_occ = int(n_x*n_y*n_z)
+        reshape_vec = (n_x, n_y, n_z)
 
     # initialize heatmap
-    heatvec = np.zeros(l)
+    heatvec = np.zeros(num_occ)
     count = 0
 
     # pred_zero = deepcopy(img_tensor[0])
     pred = model.predict(img_tensor)
     standard_prediction = pred[0, 0]
 
-    print('Kernel:     %s' % (kernel))
+    print('Kernel:     %s' % str(kernel))
     print('Stride:     %s' % (stride))
-    print('Filter:     %s' % (l))
+    print('Filter:     %s' % (num_occ))
     print('Prediction: %s' % (standard_prediction))
+    for z in range(n_z):
+        for y in range(n_y):
+            for x in range(n_x):
+                manipul_img = deepcopy(np.squeeze(img_tensor, axis=(0,-1)))
+                if n_z == 1:
+                    manipul_img[x:(x+kernel[0]), y:(y+kernel[1])] = k_value
+                else:
+                    manipul_img[x:(x+kernel[0]), y:(y+kernel[1]), z:(z+kernel[2])] = k_value
 
-    for x in range(0, img_h, stride):
+                t = vu.io.to_tensor(manipul_img)
+                pred = model.predict(t)
+                heatvec[count] = pred[0, 0]
+                count += 1
+                prog = (count/num_occ)*100
 
-        for y in range(0, img_w, stride):
+                if (count % 1) == 0:
+                    print('\r[%4d/%i] %.2f %%' % (count, num_occ, prog), end='')
 
-            manipul_img = deepcopy(img_tensor[0, :, :, 0])
-            manipul_img[x:(x+kernel), y:(y+kernel)] = 0
-            t = vu.io.to_tensor(manipul_img)
-            pred = model.predict(t)
-            heatvec[count] = pred[0, 0]
 
-            prog = (count/l)*100
-
-            if (count % 1) == 0:
-                print('\r[%4d/%i] %.2f %%' % (count, l, prog), end='')
-            count += 1
-
-    heatmap = np.reshape(heatvec, (n, n))
-    title = 'heatmap'
-    # title = os.path.basename('heatmap')
-    if plot is True:
-        plt.imshow(heatmap)
-        plt.colorbar()
-        plt.title('%s\nstandard_prediction=%s\nsize=%s kernel=%s stride=%s'
-                  % (title, standard_prediction, size, kernel, stride))
-        plt.xticks([])
-        plt.yticks([])
-        plt.show
+    heatmap = np.reshape(heatvec, reshape_vec)
+#    title = 'heatmap'
+#    # title = os.path.basename('heatmap')
+#    if plot is True:
+#        plt.imshow(heatmap)
+#        plt.colorbar()
+#        plt.title('%s\nstandard_prediction=%s\nsize=%s kernel=%s stride=%s'
+#                  % (title, standard_prediction, size, kernel, stride))
+#        plt.xticks([])
+#        plt.yticks([])
+#        plt.show
     return heatmap
 
 

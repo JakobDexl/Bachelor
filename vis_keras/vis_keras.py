@@ -7,7 +7,7 @@ for a keras sequential models.
 """
 
 
-# from copy import deepcopy
+from copy import deepcopy
 # from keras.models import Sequential
 from keras.models import load_model
 import matplotlib.pyplot as plt
@@ -58,6 +58,7 @@ class Model_explorer():
             self.t_size = self.input_shape[1], self.input_shape[2], self.input_shape[3]
         self.num_test_obj = 0
         self.active_object = None
+        self.generator = None
         self.summary = lambda: self.model.summary()
         Model_explorer.info(self)
 
@@ -98,11 +99,26 @@ class Model_explorer():
            return
 
         hstack = []
-        for i in range(self.batch.shape[0]):
-            # tmp = self.batch[i]
-            tmp = np.expand_dims(self.batch, axis=0)
-            heatmap = vc.grad_cam(self.model, tmp[:, i])
-            hstack.append(heatmap)
+
+        if self.generator is not None:
+            count=0
+            tmp=[]
+            le=(16*gen.__len__())-9
+            for i in range(1):
+                a = gen.__getitem__(i)
+                for l in a[0]:
+                    t=deepcopy(l)
+                    t = np.expand_dims(t, axis=0)
+                    b = vk.vis_core.grad_cam(model,t,out=arg)
+                    h_stack.append(b)
+                    print('\r[%i/%i] ' % (count, le), end='')
+                    count += 1
+        else:
+            for i in range(self.batch.shape[0]):
+                # tmp = self.batch[i]
+                tmp = np.expand_dims(self.batch, axis=0)
+                heatmap = vc.grad_cam(self.model, tmp[:, i])
+                hstack.append(heatmap)
 
         if plot_first is True:
             plt.matshow(hstack[0])

@@ -8,8 +8,8 @@ from copy import deepcopy
 import os
 import numpy as np
 from scipy.ndimage import zoom
-from time import time
-#import preprocess as prep
+# from time import time
+# import preprocess as prep
 
 try:
     import cv2
@@ -57,7 +57,7 @@ def cv_load_2d(img_path, target_size=None):
     return img
 
 
-def load_2d(img_path, t_size=None):
+def load_2d(img_path, target_size=None):
     '''
     Load an 2D image to an array with the keras image lib.
     # Arguments
@@ -68,9 +68,9 @@ def load_2d(img_path, t_size=None):
         img:         (Resized) grayscale image
     '''
     img_path = convert_path(img_path)
-    if not isinstance(t_size, tuple) and t_size is not None:
-        t_size = t_size, t_size
-    img = image.load_img(img_path, target_size=t_size)
+    if not isinstance(target_size, tuple) and target_size is not None:
+        target_size = target_size, target_size
+    img = image.load_img(img_path, target_size=target_size)
     img = image.img_to_array(img)
     img /= 255.
     img = img[:, :, 0]
@@ -108,7 +108,7 @@ def nii(img_path, target_size=None):
     # Returns
         out:         (Resized) Volume
     '''
-    start_time = time()
+    # start_time = time()
     if nib is None:
         print('Not available! Install nibabel first')
         return
@@ -138,7 +138,6 @@ def ext_load(path, target_size=None):
     # Returns
         out:         (Resized) Image/Volume
     '''
-    print('test')
     path = convert_path(path)
     if check_ext(path, _FORMATS2D):
         if not isinstance(target_size, tuple) and target_size is not None:
@@ -169,17 +168,30 @@ def ext_load(path, target_size=None):
         return
 
 
-def load(path, t_size=None):
-
-    if t_size is not None:
-        if isinstance(t_size, int):
+def load(path, target_size=None):
+    '''
+    Function for fast loading an image or batch. Supports 2D/3D. Can walk
+    through whole directories and searches for supported formats. Supported
+    formats are specified through target_size or in case of single size the
+    format can be specified after the search process.
+    Not recommanded for huge batches bigger than 100. Therefore use instead
+    the generator class.
+    # Arguments
+        path:        Path with filename as string
+        target_size: Output target size, supports single sizes for cubes
+    # Returns
+        img:         Image or batch in tensor form
+        path_str:    List of strings filled with path to every image
+    '''
+    if target_size is not None:
+        if isinstance(target_size, int):
             flag = 'unclear'
-        if isinstance(t_size, tuple):
-            if len(t_size) == 2:
+        if isinstance(target_size, tuple):
+            if len(target_size) == 2:
                 flag = '2D'
-            if len(t_size) == 3:
+            if len(target_size) == 3:
                 flag = '3D'
-            if len(t_size) >= 4:
+            if len(target_size) >= 4:
                 print('False target size!')
                 return
 
@@ -187,11 +199,11 @@ def load(path, t_size=None):
 
     if os.path.isfile(path):
 
-        img = ext_load(path, t_size)
+        img = ext_load(path, target_size)
         path_str = path
 
     if os.path.isdir(path):
-        if t_size is None:
+        if target_size is None:
             print('Please enter target size for path allocation')
             return
         n_name = 0
@@ -218,10 +230,10 @@ def load(path, t_size=None):
             return
         elif flag is 'unclear' and n_name2d == 0:
             flag = '3D'
-            t_size = (t_size, t_size, t_size)
+            target_size = (target_size, target_size, target_size)
         elif flag is 'unclear' and n_name3d == 0:
             flag = '2D'
-            t_size = (t_size, t_size)
+            target_size = (target_size, target_size)
 
         if flag is 'unclear':
 
@@ -235,14 +247,15 @@ def load(path, t_size=None):
                     n_name = n_name2d
                     path_str = path_str_2d
                     del(path_str_2d)
-                    cube = np.zeros((n_name, t_size, t_size), dtype=np.float32)
+                    cube = np.zeros((n_name, target_size, target_size),
+                                    dtype=np.float32)
                     break
                 if str(var) == '3':
                     n_name = n_name3d
                     path_str = path_str_3d
                     del(path_str_3d)
-                    cube = np.zeros((n_name, t_size, t_size, t_size),
-                                    dtype=np.float32)
+                    cube = np.zeros((n_name, target_size, target_size,
+                                     target_size), dtype=np.float32)
                     break
                 if str(var) == 'exit':
                     return
@@ -251,13 +264,14 @@ def load(path, t_size=None):
             n_name = n_name2d
             path_str = path_str_2d
             del(path_str_2d)
-            cube = np.zeros((n_name, t_size[0], t_size[1]), dtype=np.float32)
+            cube = np.zeros((n_name, target_size[0], target_size[1]),
+                            dtype=np.float32)
         elif flag is '3D':
             n_name = n_name3d
             path_str = path_str_3d
             del(path_str_3d)
-            cube = np.zeros((n_name, t_size[0], t_size[1], t_size[2]),
-                            dtype=np.float32)
+            cube = np.zeros((n_name, target_size[0], target_size[1],
+                             target_size[2]), dtype=np.float32)
 
         if n_name > 100:
                 print('Warning! Allocation size too big! Use generator'
@@ -267,7 +281,7 @@ def load(path, t_size=None):
         c = 0
         # make/load picture matrix
         for i in path_str:
-            img = ext_load(i, t_size)
+            img = ext_load(i, target_size)
             if flag is '2D':
                 cube[c] = deepcopy(img[0, :, :, 0])
             if flag is '3D':
@@ -279,157 +293,16 @@ def load(path, t_size=None):
     return img, path_str
 
 
-def load_generator(path, batch_size=3, target_size=(20, 20), shuffle=True,
-                   classes=True):
-    if os.path.isdir(path):
-        if len(target_size) is 2:
-            formats = _FORMATS2D
-            print('2D')
-        if len(target_size) is 3:
-            formats = _FORMATS3D
-            print('3D')
-#        else:
-#            print('Unsupported target_size')
-
-        n_name = 0
-        path_str = []
-        folder_list = []
-        # dirslist = []
-        path = convert_path(path)
-
-        for root, dirs, files in os.walk(path):
-            for file in files:
-                if check_ext(file, formats):
-                    tmp = os.path.join(root, file)
-                    tmp = convert_path(tmp)
-                    path_str.append(tmp)
-                    folder_list.append(get_folder(tmp))
-            # dirslist.append(dirs)
-
-        classes = to_binary(folder_list)[1]
-        n_name = len(path_str)
-
-        if shuffle:
-            index_arr = np.random.permutation(n_name)
-        else:
-            index_arr = np.arrange(n_name)
-
-        batch = np.zeros((batch_size,)+target_size)
-        batch = np.expand_dims(batch, axis=-1)
-        label = np.zeros(batch_size)
-        batch_len = int(len(index_arr)//batch_size)
-
-        if len(index_arr) % batch_size != 0:
-            batch_len += 1
-
-        print(batch_len, n_name, len(classes))
-
-        gen = chunks(index_arr, batch_size)
-
-        cnames = []
-
-        while True:
-            for p in gen:
-
-                cnames = []
-                for i, j in enumerate(p):
-                    j = int(j)
-                    img = ext_load(path_str[j], target_size)
-                    tmp = classes[j]
-                    cnames.append(folder_list[j])
-                    batch[i] = deepcopy(img)
-                    label[i] = tmp
-
-#                print('Num:    %s' % p)
-#                print('Folder: %s' % cnames)
-#                print('Label:  %s' % label)
-
-
-            yield batch, label
-
-
-class generator():
-    def __init__(self, path, batch_size=3, target_size=(20, 20), shuffle=True,
-                 classes=True):
-        self.path = path
-        self.batch_size = batch_size
-        self.target_size = target_size
-        self.shuffle = shuffle
-
-        if os.path.isdir(self.path):
-            if len(self.target_size) is 2:
-                self.formats = _FORMATS2D
-                print('2D')
-            if len(self.target_size) is 3:
-                self.formats = _FORMATS3D
-                print('3D')
-    #        else:
-    #            print('Unsupported target_size')
-
-            self.n_name = 0
-            self.path_str = []
-            self.folder_list = []
-            # dirslist = []
-            self.path = convert_path(path)
-
-            for root, dirs, files in os.walk(self.path):
-                for file in files:
-                    if check_ext(file, self.formats):
-                        tmp = os.path.join(root, file)
-                        tmp = convert_path(tmp)
-                        self.path_str.append(tmp)
-                        self.folder_list.append(get_folder(tmp))
-                # dirslist.append(dirs)
-
-            self.classes = to_binary(self.folder_list)[1]
-            self.n_name = len(self.path_str)
-
-            if shuffle:
-                self.index_arr = np.random.permutation(self.n_name)
-            else:
-                self.index_arr = np.arrange(self.n_name)
-
-            self.batch_len = int(len(self.index_arr)//batch_size)
-
-            if len(self.index_arr) % self.batch_size != 0:
-                self.batch_len += 1
-
-            print(self.batch_len, self.n_name, len(self.classes))
-
-    def _flow(self):
-        batch = np.zeros((self.batch_size,)+self.target_size)
-        label = np.zeros(self.batch_size)
-        gen = chunks(self.index_arr, self.batch_size)
-        while True:
-            for p in gen:
-                for i, j in enumerate(p):
-                    j = int(j)
-                    img = ext_load(self.path_str[j], self.target_size)
-                    img = np.squeeze(img, axis=-1)
-                    tmp = self.classes[j]
-                    batch[i] = deepcopy(img)
-                    label[i] = tmp
-
-#                print('Num:    %s' % p)
-#                print('Folder: %s' % cnames)
-#                print('Label:  %s' % label)
-
-            batch = np.expand_dims(batch, axis=-1)
-            yield batch, label
-
-    def __getitem__(self, idx):
-        return self._flow
-
-    def __next__(self, *args, **kwargs):
-        return self.next(*args, **kwargs)
-
-    def __iter__(self):
-        return self
-
-    # def load(self):
-
-
 def to_binary(classlist):
+    '''
+    Converts a list of classnames with size n to a binary list of size n.
+    More than 2 labels are possible but not practicable. Use one hot encoding.
+    # Arguments
+        classlist:      List with classnames
+    # Returns
+        labels:         List with label names
+        binary:         Binary list
+    '''
     labels = []
     binary = []
     for element in classlist:
@@ -437,7 +310,9 @@ def to_binary(classlist):
             labels.append(element)
         index = labels.index(element)
         binary.append(index)
-
+    if len(labels) > 2:
+        print('Attention! Not a binary list,'
+              ' input contains more than 2 labels')
     return labels, binary
 
 
@@ -514,7 +389,7 @@ def get_folder(path, pos=1):
     subpath, ext = os.path.split(path)
 
     for i in range(pos):
-        #path = os.path.dirname(path)
+        # path = os.path.dirname(path)
         path, folder = os.path.split(path)
 
     return folder
