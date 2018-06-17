@@ -1,0 +1,405 @@
+cat_n_out_n=f(gen_cat_normal,cat_phantom,cn=['normal','anormal'],name='nur normal', arg ='pos',ca=1)
+cat_an_out_n=f(gen_cat_anormal,cat_phantom,cn=['normal','anormal'],name='nur anormal',arg ='pos', ca=0)
+cat_n_out_n=f(gen_cat_normal,cat_phantom,cn=['normal','anormal'],name='nur normal', arg ='neg', ca=1)
+cat_an_out_n=f(gen_cat_anormal,cat_phantom,cn=['normal','anormal'],name='nur anormal',arg ='neg', ca=0)
+
+nur normal [  0/103] arg_high:  anormal, pred:[[  1.00000000e+00   4.71417718e-13]],pos, mean:1e-01
+nur normal [  1/103] arg_high:  anormal, pred:[[  9.99999523e-01   4.27732118e-07]],pos, mean:2e-01
+nur normal [  2/103] arg_high:  anormal, pred:[[  9.99979138e-01   2.08721522e-05]],pos, mean:2e-01
+nur normal [  3/103] arg_high:  anormal, pred:          [[ 0.94827825  0.05172179]],pos, mean:2e-01
+nur normal [  4/103] arg_high:  anormal, pred:[[  9.99948144e-01   5.19040332e-05]],pos, mean:2e-01
+nur normal [  5/103] arg_high:  anormal, pred:[[  1.00000000e+00   2.75635986e-10]],pos, mean:9e-02
+nur normal [  6/103] arg_high:  anormal, pred:[[  2.11958522e-08   1.00000000e+00]],pos, mean:2e-01
+nur normal [  7/103] arg_high:  anormal, pred:[[  9.99951601e-01   4.83749718e-05]],pos, mean:2e-01
+nur normal [  8/103] arg_high:  anormal, pred:[[  1.00000000e+00   2.00280903e-09]],pos, mean:1e-01
+nur normal [  9/103] arg_high:  anormal, pred:[[  9.99994278e-01   5.77895889e-06]],pos, mean:1e-01
+nur normal [ 10/103] arg_high:  anormal, pred:[[  9.99999881e-01   1.31366946e-07]],pos, mean:1e-01
+nur normal [ 11/103] arg_high:  anormal, pred:          [[ 0.80887896  0.19112106]],pos, mean:2e-01
+nur normal [ 12/103] arg_high:  anormal, pred:          [[ 0.74413514  0.25586486]],pos, mean:2e-01
+nur normal [ 13/103] arg_high:  anormal, pred:[[  9.99999642e-01   3.40525816e-07]],pos, mean:2e-01
+nur normal [ 14/103] arg_high:  anormal, pred:[[  9.99999881e-01   1.46327963e-07]],pos, mean:2e-01
+nur normal [ 15/103] arg_high:  anormal, pred:[[  9.99995828e-01   4.17700085e-06]],pos, mean:1e-01
+nur normal [ 16/103] arg_high:  anormal, pred:[[  1.00000000e+00   1.32319461e-10]],pos, mean:1e-01
+nur normal [ 17/103] arg_high:  anormal, pred:          [[ 0.85722178  0.14277823]],pos, mean:2e-01
+nur normal [ 18/103] arg_high:  anormal, pred:          [[ 0.92568886  0.07431115]],pos, mean:2e-01
+nur normal [ 19/103] arg_high:  anormal, pred:[[  9.99830127e-01   1.69856998e-04]],pos, mean:2e-01
+nur normal [ 20/103] arg_high:  anormal, pred:[[  1.00000000e+00   1.34759814e-09]],pos, mean:1e-01
+nur normal [ 21/103] arg_high:  anormal, pred:          [[ 0.99316978  0.00683016]],pos, mean:2e-01
+nur normal [ 22/103] arg_high:  anormal, pred:[[  9.99948740e-01   5.12071274e-05]],pos, mean:1e-01
+nur normal [ 23/103] arg_high:  anormal, pred:[[  9.99736965e-01   2.63053167e-04]],pos, mean:2e-01
+nur normal [ 24/103] arg_high:  anormal, pred:[[  9.99998689e-01   1.32287005e-06]],pos, mean:1e-01
+nur normal [ 25/103] arg_high:  anormal, pred:[[  1.00000000e+00   1.05738029e-10]],pos, mean:1e-01
+nur normal [ 26/103] arg_high:  anormal, pred:[[  9.99978423e-01   2.15693835e-05]],pos, mean:2e-01
+nur normal [ 27/103] arg_high:  anormal, pred:[[  1.00000000e+00   6.34000230e-09]],pos, mean:1e-01
+nur normal [ 28/103] arg_high:  anormal, pred:[[  1.00000000e+00   2.34610976e-11]],pos, mean:1e-01
+nur normal [ 29/103] arg_high:  anormal, pred:          [[ 0.96090692  0.03909305]],pos, mean:1e-01
+nur normal [ 30/103] arg_high:  anormal, pred:[[  1.00000000e+00   2.42316442e-08]],pos, mean:9e-02
+nur normal [ 31/103] arg_high:  anormal, pred:          [[ 0.00153805  0.99846196]],pos, mean:2e-01
+nur normal [ 32/103] arg_high:  anormal, pred:[[  1.00000000e+00   7.66238095e-09]],pos, mean:1e-01
+nur normal [ 33/103] arg_high:  anormal, pred:[[  9.99994516e-01   5.43070610e-06]],pos, mean:2e-01
+nur normal [ 34/103] arg_high:  anormal, pred:[[  9.99998450e-01   1.49017353e-06]],pos, mean:2e-01
+nur normal [ 35/103] arg_high:  anormal, pred:[[  9.99997020e-01   3.03099273e-06]],pos, mean:1e-01
+nur normal [ 36/103] arg_high:  anormal, pred:[[  9.99929428e-01   7.05302300e-05]],pos, mean:1e-01
+nur normal [ 37/103] arg_high:  anormal, pred:[[  9.99998569e-01   1.38580992e-06]],pos, mean:2e-01
+nur normal [ 38/103] arg_high:  anormal, pred:[[  9.99984980e-01   1.50197056e-05]],pos, mean:1e-01
+nur normal [ 39/103] arg_high:  anormal, pred:[[  9.99999881e-01   1.04997390e-07]],pos, mean:1e-01
+nur normal [ 40/103] arg_high:  anormal, pred:[[  9.99978542e-01   2.15149848e-05]],pos, mean:2e-01
+nur normal [ 41/103] arg_high:  anormal, pred:[[  9.99969482e-01   3.05126432e-05]],pos, mean:2e-01
+nur normal [ 42/103] arg_high:  anormal, pred:          [[ 0.99465585  0.00534412]],pos, mean:2e-01
+nur normal [ 43/103] arg_high:  anormal, pred:[[  9.99656200e-01   3.43773572e-04]],pos, mean:2e-01
+nur normal [ 44/103] arg_high:  anormal, pred:[[  9.99999881e-01   1.28826201e-07]],pos, mean:2e-01
+nur normal [ 45/103] arg_high:  anormal, pred:          [[ 0.99767929  0.00232073]],pos, mean:2e-01
+nur normal [ 46/103] arg_high:  anormal, pred:[[  9.99999881e-01   1.03882257e-07]],pos, mean:1e-01
+nur normal [ 47/103] arg_high:  anormal, pred:[[  1.00000000e+00   7.16772597e-09]],pos, mean:1e-01
+nur normal [ 48/103] arg_high:  anormal, pred:          [[ 0.99898809  0.00101192]],pos, mean:2e-01
+nur normal [ 49/103] arg_high:  anormal, pred:[[  9.99822557e-01   1.77522743e-04]],pos, mean:2e-01
+nur normal [ 50/103] arg_high:  anormal, pred:          [[ 0.01397744  0.98602259]],pos, mean:2e-01
+nur normal [ 51/103] arg_high:  anormal, pred:[[  9.99728620e-01   2.71407596e-04]],pos, mean:2e-01
+nur normal [ 52/103] arg_high:  anormal, pred:[[  1.00000000e+00   4.41529515e-08]],pos, mean:2e-01
+nur normal [ 53/103] arg_high:  anormal, pred:          [[ 0.07041715  0.92958289]],pos, mean:2e-01
+nur normal [ 54/103] arg_high:  anormal, pred:[[  6.48811751e-04   9.99351203e-01]],pos, mean:2e-01
+nur normal [ 55/103] arg_high:  anormal, pred:          [[ 0.06465095  0.93534905]],pos, mean:1e-01
+nur normal [ 56/103] arg_high:  anormal, pred:[[  1.00000000e+00   2.27600383e-09]],pos, mean:1e-01
+nur normal [ 57/103] arg_high:  anormal, pred:[[  9.99999166e-01   8.17389775e-07]],pos, mean:2e-01
+nur normal [ 58/103] arg_high:  anormal, pred:[[  1.00000000e+00   1.02319078e-08]],pos, mean:1e-01
+nur normal [ 59/103] arg_high:  anormal, pred:          [[ 0.0138565   0.98614353]],pos, mean:2e-01
+nur normal [ 60/103] arg_high:  anormal, pred:[[  1.00000000e+00   3.20009508e-09]],pos, mean:1e-01
+nur normal [ 61/103] arg_high:  anormal, pred:[[  1.00000000e+00   4.50024125e-08]],pos, mean:1e-01
+nur normal [ 62/103] arg_high:  anormal, pred:[[  9.99999285e-01   6.74668627e-07]],pos, mean:1e-01
+nur normal [ 63/103] arg_high:  anormal, pred:[[  9.99966741e-01   3.32850650e-05]],pos, mean:2e-01
+nur normal [ 64/103] arg_high:  anormal, pred:          [[ 0.98669213  0.01330779]],pos, mean:2e-01
+nur normal [ 65/103] arg_high:  anormal, pred:[[  9.99999404e-01   6.27672819e-07]],pos, mean:1e-01
+nur normal [ 66/103] arg_high:  anormal, pred:[[  7.22794898e-14   1.00000000e+00]],pos, mean:2e-01
+nur normal [ 67/103] arg_high:  anormal, pred:[[  1.72586995e-04   9.99827385e-01]],pos, mean:2e-01
+nur normal [ 68/103] arg_high:  anormal, pred:          [[ 0.01186356  0.98813641]],pos, mean:2e-01
+nur normal [ 69/103] arg_high:  anormal, pred:[[  9.99997020e-01   2.98369400e-06]],pos, mean:2e-01
+nur normal [ 70/103] arg_high:  anormal, pred:[[  9.99999881e-01   1.13301461e-07]],pos, mean:1e-01
+nur normal [ 71/103] arg_high:  anormal, pred:          [[ 0.95046312  0.04953686]],pos, mean:2e-01
+nur normal [ 72/103] arg_high:  anormal, pred:[[  1.00000000e+00   1.16799806e-10]],pos, mean:1e-01
+nur normal [ 73/103] arg_high:  anormal, pred:[[  9.99999762e-01   2.23586952e-07]],pos, mean:1e-01
+nur normal [ 74/103] arg_high:  anormal, pred:[[  9.99603689e-01   3.96288204e-04]],pos, mean:2e-01
+nur normal [ 75/103] arg_high:  anormal, pred:[[  1.00000000e+00   1.48655965e-09]],pos, mean:1e-01
+nur normal [ 76/103] arg_high:  anormal, pred:[[  9.99995112e-01   4.85632472e-06]],pos, mean:2e-01
+nur normal [ 77/103] arg_high:  anormal, pred:[[  9.99999642e-01   3.29655705e-07]],pos, mean:1e-01
+nur normal [ 78/103] arg_high:  anormal, pred:          [[ 0.99647045  0.0035296 ]],pos, mean:1e-01
+nur normal [ 79/103] arg_high:  anormal, pred:[[  1.00000000e+00   9.02358455e-09]],pos, mean:1e-01
+nur normal [ 80/103] arg_high:  anormal, pred:[[  9.99994755e-01   5.22916889e-06]],pos, mean:2e-01
+nur normal [ 81/103] arg_high:  anormal, pred:          [[ 0.11187872  0.88812125]],pos, mean:2e-01
+nur normal [ 82/103] arg_high:  anormal, pred:[[  9.99174297e-01   8.25729454e-04]],pos, mean:2e-01
+nur normal [ 83/103] arg_high:  anormal, pred:          [[ 0.05707869  0.94292134]],pos, mean:2e-01
+nur normal [ 84/103] arg_high:  anormal, pred:[[  9.99993324e-01   6.64348408e-06]],pos, mean:2e-01
+nur normal [ 85/103] arg_high:  anormal, pred:[[  1.00000000e+00   1.22330158e-11]],pos, mean:1e-01
+nur normal [ 86/103] arg_high:  anormal, pred:          [[ 0.99639881  0.00360122]],pos, mean:2e-01
+nur normal [ 87/103] arg_high:  anormal, pred:[[  9.99999762e-01   1.84862628e-07]],pos, mean:1e-01
+nur normal [ 88/103] arg_high:  anormal, pred:          [[ 0.63913846  0.36086157]],pos, mean:2e-01
+nur normal [ 89/103] arg_high:  anormal, pred:[[  9.99997735e-01   2.26100337e-06]],pos, mean:2e-01
+nur normal [ 90/103] arg_high:  anormal, pred:          [[ 0.98385125  0.0161488 ]],pos, mean:2e-01
+nur normal [ 91/103] arg_high:  anormal, pred:          [[ 0.00160585  0.99839407]],pos, mean:2e-01
+nur normal [ 92/103] arg_high:  anormal, pred:[[  9.99943376e-01   5.65648843e-05]],pos, mean:1e-01
+nur normal [ 93/103] arg_high:  anormal, pred:          [[ 0.5896678   0.41033226]],pos, mean:2e-01
+nur normal [ 94/103] arg_high:  anormal, pred:[[  1.00000000e+00   2.09892570e-09]],pos, mean:2e-01
+nur normal [ 95/103] arg_high:  anormal, pred:[[  9.99835014e-01   1.64981728e-04]],pos, mean:2e-01
+nur normal [ 96/103] arg_high:  anormal, pred:[[  9.99999881e-01   1.15780438e-07]],pos, mean:2e-01
+nur normal [ 97/103] arg_high:  anormal, pred:          [[ 0.98966789  0.01033216]],pos, mean:1e-01
+nur normal [ 98/103] arg_high:  anormal, pred:          [[ 0.00929144  0.99070859]],pos, mean:1e-01
+nur normal [ 99/103] arg_high:  anormal, pred:[[  1.00000000e+00   2.99688097e-08]],pos, mean:1e-01
+nur anormal [  0/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 57709
+nur anormal [  1/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 71761
+nur anormal [  2/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 55827
+nur anormal [  3/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 67057
+nur anormal [  4/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 61261
+nur anormal [  5/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 75372
+nur anormal [  6/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 52784
+nur anormal [  7/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 51517
+nur anormal [  8/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 59370
+nur anormal [  9/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 77662
+nur anormal [ 10/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 75232
+nur anormal [ 11/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 78561
+nur anormal [ 12/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 55674
+nur anormal [ 13/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 61542
+nur anormal [ 14/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 86653
+nur anormal [ 15/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 47902
+nur anormal [ 16/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 79750
+nur anormal [ 17/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 53001
+nur anormal [ 18/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 70173
+nur anormal [ 19/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 54961
+nur anormal [ 20/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 78181
+nur anormal [ 21/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 73226
+nur anormal [ 22/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 57445
+nur anormal [ 23/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 39899
+nur anormal [ 24/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 62083
+nur anormal [ 25/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 72704
+nur anormal [ 26/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 78538
+nur anormal [ 27/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 68245
+nur anormal [ 28/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 66207
+nur anormal [ 29/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 64316
+nur anormal [ 30/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 67443
+nur anormal [ 31/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 35394
+nur anormal [ 32/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 61744
+nur anormal [ 33/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 53684
+nur anormal [ 34/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 54057
+nur anormal [ 35/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 58462
+nur anormal [ 36/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 41099
+nur anormal [ 37/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 64460
+nur anormal [ 38/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 74900
+nur anormal [ 39/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 58555
+nur anormal [ 40/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 68354
+nur anormal [ 41/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 55806
+nur anormal [ 42/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 65019
+nur anormal [ 43/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 76200
+nur anormal [ 44/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 69270
+nur anormal [ 45/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 92636
+nur anormal [ 46/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 66746
+nur anormal [ 47/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 55765
+nur anormal [ 48/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 76458
+nur anormal [ 49/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 64810
+nur anormal [ 50/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 41509
+nur anormal [ 51/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 80866
+nur anormal [ 52/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 75382
+nur anormal [ 53/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 59637
+nur anormal [ 54/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 64403
+nur anormal [ 55/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 58091
+nur anormal [ 56/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 66193
+nur anormal [ 57/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 67265
+nur anormal [ 58/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 66010
+nur anormal [ 59/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 65183
+nur anormal [ 60/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 53288
+nur anormal [ 61/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 60677
+nur anormal [ 62/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 48783
+nur anormal [ 63/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 73154
+nur anormal [ 64/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 59223
+nur anormal [ 65/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 51924
+nur anormal [ 66/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 68462
+nur anormal [ 67/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 90182
+nur anormal [ 68/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 78089
+nur anormal [ 69/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 89971
+nur anormal [ 70/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 68544
+nur anormal [ 71/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 72295
+nur anormal [ 72/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 64053
+nur anormal [ 73/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 41947
+nur anormal [ 74/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 65758
+nur anormal [ 75/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 46585
+nur anormal [ 76/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 53199
+nur anormal [ 77/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 37342
+nur anormal [ 78/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 32348
+nur anormal [ 79/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 58373
+nur anormal [ 80/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 64998
+nur anormal [ 81/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 72421
+nur anormal [ 82/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 67876
+nur anormal [ 83/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 56300
+nur anormal [ 84/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 76661
+nur anormal [ 85/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 65609
+nur anormal [ 86/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 70624
+nur anormal [ 87/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 52326
+nur anormal [ 88/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 63004
+nur anormal [ 89/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 58602
+nur anormal [ 90/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 73716
+nur anormal [ 91/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 71987
+nur anormal [ 92/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 32825
+nur anormal [ 93/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 71211
+nur anormal [ 94/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 54828
+nur anormal [ 95/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 60931
+nur anormal [ 96/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 71144
+nur anormal [ 97/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 66868
+nur anormal [ 98/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 64282
+nur anormal [ 99/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 56302
+nur normal [  0/103] arg_high:  anormal, pred:[[  1.00000000e+00   4.71417718e-13]],neg, mean: 0e+00
+nur normal [  1/103] arg_high:  anormal, pred:[[  9.99999523e-01   4.27732118e-07]],neg, mean: 0e+00
+nur normal [  2/103] arg_high:  anormal, pred:[[  9.99979138e-01   2.08721522e-05]],neg, mean: 0e+00
+nur normal [  3/103] arg_high:  anormal, pred:          [[ 0.94827825  0.05172179]],neg, mean: 0e+00
+nur normal [  4/103] arg_high:  anormal, pred:[[  9.99948144e-01   5.19040332e-05]],neg, mean: 0e+00
+nur normal [  5/103] arg_high:  anormal, pred:[[  1.00000000e+00   2.75635986e-10]],neg, mean: 1e-01
+nur normal [  6/103] arg_high:  anormal, pred:[[  2.11958522e-08   1.00000000e+00]],neg, mean: 0e+00
+nur normal [  7/103] arg_high:  anormal, pred:[[  9.99951601e-01   4.83749718e-05]],neg, mean: 0e+00
+nur normal [  8/103] arg_high:  anormal, pred:[[  1.00000000e+00   2.00280903e-09]],neg, mean: 0e+00
+nur normal [  9/103] arg_high:  anormal, pred:[[  9.99994278e-01   5.77895889e-06]],neg, mean: 0e+00
+nur normal [ 10/103] arg_high:  anormal, pred:[[  9.99999881e-01   1.31366946e-07]],neg, mean: 0e+00
+nur normal [ 11/103] arg_high:  anormal, pred:          [[ 0.80887896  0.19112106]],neg, mean: 0e+00
+nur normal [ 12/103] arg_high:  anormal, pred:          [[ 0.74413514  0.25586486]],neg, mean: 0e+00
+nur normal [ 13/103] arg_high:  anormal, pred:[[  9.99999642e-01   3.40525816e-07]],neg, mean: 0e+00
+nur normal [ 14/103] arg_high:  anormal, pred:[[  9.99999881e-01   1.46327963e-07]],neg, mean: 0e+00
+nur normal [ 15/103] arg_high:  anormal, pred:[[  9.99995828e-01   4.17700085e-06]],neg, mean: 0e+00
+nur normal [ 16/103] arg_high:  anormal, pred:[[  1.00000000e+00   1.32319461e-10]],neg, mean: 0e+00
+nur normal [ 17/103] arg_high:  anormal, pred:          [[ 0.85722178  0.14277823]],neg, mean: 0e+00
+nur normal [ 18/103] arg_high:  anormal, pred:          [[ 0.92568886  0.07431115]],neg, mean: 0e+00
+nur normal [ 19/103] arg_high:  anormal, pred:[[  9.99830127e-01   1.69856998e-04]],neg, mean: 0e+00
+nur normal [ 20/103] arg_high:  anormal, pred:[[  1.00000000e+00   1.34759814e-09]],neg, mean: 0e+00
+nur normal [ 21/103] arg_high:  anormal, pred:          [[ 0.99316978  0.00683016]],neg, mean: 0e+00
+nur normal [ 22/103] arg_high:  anormal, pred:[[  9.99948740e-01   5.12071274e-05]],neg, mean: 0e+00
+nur normal [ 23/103] arg_high:  anormal, pred:[[  9.99736965e-01   2.63053167e-04]],neg, mean: 0e+00
+nur normal [ 24/103] arg_high:  anormal, pred:[[  9.99998689e-01   1.32287005e-06]],neg, mean: 0e+00
+nur normal [ 25/103] arg_high:  anormal, pred:[[  1.00000000e+00   1.05738029e-10]],neg, mean: 0e+00
+nur normal [ 26/103] arg_high:  anormal, pred:[[  9.99978423e-01   2.15693835e-05]],neg, mean: 0e+00
+nur normal [ 27/103] arg_high:  anormal, pred:[[  1.00000000e+00   6.34000230e-09]],neg, mean: 0e+00
+nur normal [ 28/103] arg_high:  anormal, pred:[[  1.00000000e+00   2.34610976e-11]],neg, mean: 1e-01
+nur normal [ 29/103] arg_high:  anormal, pred:          [[ 0.96090692  0.03909305]],neg, mean: 0e+00
+nur normal [ 30/103] arg_high:  anormal, pred:[[  1.00000000e+00   2.42316442e-08]],neg, mean: 0e+00
+nur normal [ 31/103] arg_high:  anormal, pred:          [[ 0.00153805  0.99846196]],neg, mean: 0e+00
+nur normal [ 32/103] arg_high:  anormal, pred:[[  1.00000000e+00   7.66238095e-09]],neg, mean: 0e+00
+nur normal [ 33/103] arg_high:  anormal, pred:[[  9.99994516e-01   5.43070610e-06]],neg, mean: 0e+00
+nur normal [ 34/103] arg_high:  anormal, pred:[[  9.99998450e-01   1.49017353e-06]],neg, mean: 0e+00
+nur normal [ 35/103] arg_high:  anormal, pred:[[  9.99997020e-01   3.03099273e-06]],neg, mean: 0e+00
+nur normal [ 36/103] arg_high:  anormal, pred:[[  9.99929428e-01   7.05302300e-05]],neg, mean: 0e+00
+nur normal [ 37/103] arg_high:  anormal, pred:[[  9.99998569e-01   1.38580992e-06]],neg, mean: 0e+00
+nur normal [ 38/103] arg_high:  anormal, pred:[[  9.99984980e-01   1.50197056e-05]],neg, mean: 0e+00
+nur normal [ 39/103] arg_high:  anormal, pred:[[  9.99999881e-01   1.04997390e-07]],neg, mean: 1e-01
+nur normal [ 40/103] arg_high:  anormal, pred:[[  9.99978542e-01   2.15149848e-05]],neg, mean: 0e+00
+nur normal [ 41/103] arg_high:  anormal, pred:[[  9.99969482e-01   3.05126432e-05]],neg, mean: 0e+00
+nur normal [ 42/103] arg_high:  anormal, pred:          [[ 0.99465585  0.00534412]],neg, mean: 0e+00
+nur normal [ 43/103] arg_high:  anormal, pred:[[  9.99656200e-01   3.43773572e-04]],neg, mean: 0e+00
+nur normal [ 44/103] arg_high:  anormal, pred:[[  9.99999881e-01   1.28826201e-07]],neg, mean: 0e+00
+nur normal [ 45/103] arg_high:  anormal, pred:          [[ 0.99767929  0.00232073]],neg, mean: 0e+00
+nur normal [ 46/103] arg_high:  anormal, pred:[[  9.99999881e-01   1.03882257e-07]],neg, mean: 0e+00
+nur normal [ 47/103] arg_high:  anormal, pred:[[  1.00000000e+00   7.16772597e-09]],neg, mean: 0e+00
+nur normal [ 48/103] arg_high:  anormal, pred:          [[ 0.99898809  0.00101192]],neg, mean: 0e+00
+nur normal [ 49/103] arg_high:  anormal, pred:[[  9.99822557e-01   1.77522743e-04]],neg, mean: 0e+00
+nur normal [ 50/103] arg_high:  anormal, pred:          [[ 0.01397744  0.98602259]],neg, mean: 0e+00
+nur normal [ 51/103] arg_high:  anormal, pred:[[  9.99728620e-01   2.71407596e-04]],neg, mean: 0e+00
+nur normal [ 52/103] arg_high:  anormal, pred:[[  1.00000000e+00   4.41529515e-08]],neg, mean: 0e+00
+nur normal [ 53/103] arg_high:  anormal, pred:          [[ 0.07041715  0.92958289]],neg, mean: 0e+00
+nur normal [ 54/103] arg_high:  anormal, pred:[[  6.48811751e-04   9.99351203e-01]],neg, mean: 0e+00
+nur normal [ 55/103] arg_high:  anormal, pred:          [[ 0.06465095  0.93534905]],neg, mean: 0e+00
+nur normal [ 56/103] arg_high:  anormal, pred:[[  1.00000000e+00   2.27600383e-09]],neg, mean: 0e+00
+nur normal [ 57/103] arg_high:  anormal, pred:[[  9.99999166e-01   8.17389775e-07]],neg, mean: 0e+00
+nur normal [ 58/103] arg_high:  anormal, pred:[[  1.00000000e+00   1.02319078e-08]],neg, mean: 1e-01
+nur normal [ 59/103] arg_high:  anormal, pred:          [[ 0.0138565   0.98614353]],neg, mean: 0e+00
+nur normal [ 60/103] arg_high:  anormal, pred:[[  1.00000000e+00   3.20009508e-09]],neg, mean: 0e+00
+nur normal [ 61/103] arg_high:  anormal, pred:[[  1.00000000e+00   4.50024125e-08]],neg, mean: 1e-01
+nur normal [ 62/103] arg_high:  anormal, pred:[[  9.99999285e-01   6.74668627e-07]],neg, mean: 0e+00
+nur normal [ 63/103] arg_high:  anormal, pred:[[  9.99966741e-01   3.32850650e-05]],neg, mean: 0e+00
+nur normal [ 64/103] arg_high:  anormal, pred:          [[ 0.98669213  0.01330779]],neg, mean: 0e+00
+nur normal [ 65/103] arg_high:  anormal, pred:[[  9.99999404e-01   6.27672819e-07]],neg, mean: 0e+00
+nur normal [ 66/103] arg_high:  anormal, pred:[[  7.22794898e-14   1.00000000e+00]],neg, mean: 0e+00
+nur normal [ 67/103] arg_high:  anormal, pred:[[  1.72586995e-04   9.99827385e-01]],neg, mean: 0e+00
+nur normal [ 68/103] arg_high:  anormal, pred:          [[ 0.01186356  0.98813641]],neg, mean: 0e+00
+nur normal [ 69/103] arg_high:  anormal, pred:[[  9.99997020e-01   2.98369400e-06]],neg, mean: 0e+00
+nur normal [ 70/103] arg_high:  anormal, pred:[[  9.99999881e-01   1.13301461e-07]],neg, mean: 0e+00
+nur normal [ 71/103] arg_high:  anormal, pred:          [[ 0.95046312  0.04953686]],neg, mean: 0e+00
+nur normal [ 72/103] arg_high:  anormal, pred:[[  1.00000000e+00   1.16799806e-10]],neg, mean: 0e+00
+nur normal [ 73/103] arg_high:  anormal, pred:[[  9.99999762e-01   2.23586952e-07]],neg, mean: 0e+00
+nur normal [ 74/103] arg_high:  anormal, pred:[[  9.99603689e-01   3.96288204e-04]],neg, mean: 0e+00
+nur normal [ 75/103] arg_high:  anormal, pred:[[  1.00000000e+00   1.48655965e-09]],neg, mean: 8e-02
+nur normal [ 76/103] arg_high:  anormal, pred:[[  9.99995112e-01   4.85632472e-06]],neg, mean: 0e+00
+nur normal [ 77/103] arg_high:  anormal, pred:[[  9.99999642e-01   3.29655705e-07]],neg, mean: 0e+00
+nur normal [ 78/103] arg_high:  anormal, pred:          [[ 0.99647045  0.0035296 ]],neg, mean: 0e+00
+nur normal [ 79/103] arg_high:  anormal, pred:[[  1.00000000e+00   9.02358455e-09]],neg, mean: 0e+00
+nur normal [ 80/103] arg_high:  anormal, pred:[[  9.99994755e-01   5.22916889e-06]],neg, mean: 0e+00
+nur normal [ 81/103] arg_high:  anormal, pred:          [[ 0.11187872  0.88812125]],neg, mean: 0e+00
+nur normal [ 82/103] arg_high:  anormal, pred:[[  9.99174297e-01   8.25729454e-04]],neg, mean: 0e+00
+nur normal [ 83/103] arg_high:  anormal, pred:          [[ 0.05707869  0.94292134]],neg, mean: 0e+00
+nur normal [ 84/103] arg_high:  anormal, pred:[[  9.99993324e-01   6.64348408e-06]],neg, mean: 0e+00
+nur normal [ 85/103] arg_high:  anormal, pred:[[  1.00000000e+00   1.22330158e-11]],neg, mean: 0e+00
+nur normal [ 86/103] arg_high:  anormal, pred:          [[ 0.99639881  0.00360122]],neg, mean: 0e+00
+nur normal [ 87/103] arg_high:  anormal, pred:[[  9.99999762e-01   1.84862628e-07]],neg, mean: 0e+00
+nur normal [ 88/103] arg_high:  anormal, pred:          [[ 0.63913846  0.36086157]],neg, mean: 0e+00
+nur normal [ 89/103] arg_high:  anormal, pred:[[  9.99997735e-01   2.26100337e-06]],neg, mean: 0e+00
+nur normal [ 90/103] arg_high:  anormal, pred:          [[ 0.98385125  0.0161488 ]],neg, mean: 0e+00
+nur normal [ 91/103] arg_high:  anormal, pred:          [[ 0.00160585  0.99839407]],neg, mean: 0e+00
+nur normal [ 92/103] arg_high:  anormal, pred:[[  9.99943376e-01   5.65648843e-05]],neg, mean: 0e+00
+nur normal [ 93/103] arg_high:  anormal, pred:          [[ 0.5896678   0.41033226]],neg, mean: 0e+00
+nur normal [ 94/103] arg_high:  anormal, pred:[[  1.00000000e+00   2.09892570e-09]],neg, mean: 0e+00
+nur normal [ 95/103] arg_high:  anormal, pred:[[  9.99835014e-01   1.64981728e-04]],neg, mean: 0e+00
+nur normal [ 96/103] arg_high:  anormal, pred:[[  9.99999881e-01   1.15780438e-07]],neg, mean: 0e+00
+nur normal [ 97/103] arg_high:  anormal, pred:          [[ 0.98966789  0.01033216]],neg, mean: 0e+00
+nur normal [ 98/103] arg_high:  anormal, pred:          [[ 0.00929144  0.99070859]],neg, mean: 0e+00
+nur normal [ 99/103] arg_high:  anormal, pred:[[  1.00000000e+00   2.99688097e-08]],neg, mean: 0e+00
+nur anormal [  0/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 57709
+nur anormal [  1/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 71761
+nur anormal [  2/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 55827
+nur anormal [  3/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 67057
+nur anormal [  4/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 61261
+nur anormal [  5/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 75372
+nur anormal [  6/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 52784
+nur anormal [  7/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 51517
+nur anormal [  8/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 59370
+nur anormal [  9/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 77662
+nur anormal [ 10/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 75232
+nur anormal [ 11/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 78561
+nur anormal [ 12/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 55674
+nur anormal [ 13/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 61542
+nur anormal [ 14/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 86653
+nur anormal [ 15/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 47902
+nur anormal [ 16/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 79750
+nur anormal [ 17/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 53001
+nur anormal [ 18/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 70173
+nur anormal [ 19/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 54961
+nur anormal [ 20/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 78181
+nur anormal [ 21/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 73226
+nur anormal [ 22/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 57445
+nur anormal [ 23/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 39899
+nur anormal [ 24/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 62083
+nur anormal [ 25/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 72704
+nur anormal [ 26/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 78538
+nur anormal [ 27/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 68245
+nur anormal [ 28/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 66207
+nur anormal [ 29/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 64316
+nur anormal [ 30/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 67443
+nur anormal [ 31/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 35394
+nur anormal [ 32/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 61744
+nur anormal [ 33/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 53684
+nur anormal [ 34/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 54057
+nur anormal [ 35/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 58462
+nur anormal [ 36/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 41099
+nur anormal [ 37/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 64460
+nur anormal [ 38/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 74900
+nur anormal [ 39/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 58555
+nur anormal [ 40/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 68354
+nur anormal [ 41/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 55806
+nur anormal [ 42/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 65019
+nur anormal [ 43/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 76200
+nur anormal [ 44/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 69270
+nur anormal [ 45/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 92636
+nur anormal [ 46/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 66746
+nur anormal [ 47/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 55765
+nur anormal [ 48/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 76458
+nur anormal [ 49/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 64810
+nur anormal [ 50/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 41509
+nur anormal [ 51/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 80866
+nur anormal [ 52/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 75382
+nur anormal [ 53/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 59637
+nur anormal [ 54/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 64403
+nur anormal [ 55/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 58091
+nur anormal [ 56/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 66193
+nur anormal [ 57/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 67265
+nur anormal [ 58/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 66010
+nur anormal [ 59/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 65183
+nur anormal [ 60/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 53288
+nur anormal [ 61/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 60677
+nur anormal [ 62/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 48783
+nur anormal [ 63/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 73154
+nur anormal [ 64/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 59223
+nur anormal [ 65/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 51924
+nur anormal [ 66/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 68462
+nur anormal [ 67/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 90182
+nur anormal [ 68/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 78089
+nur anormal [ 69/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 89971
+nur anormal [ 70/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 68544
+nur anormal [ 71/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 72295
+nur anormal [ 72/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 64053
+nur anormal [ 73/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 41947
+nur anormal [ 74/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 65758
+nur anormal [ 75/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 46585
+nur anormal [ 76/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 53199
+nur anormal [ 77/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 37342
+nur anormal [ 78/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 32348
+nur anormal [ 79/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 58373
+nur anormal [ 80/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 64998
+nur anormal [ 81/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 72421
+nur anormal [ 82/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 67876
+nur anormal [ 83/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 56300
+nur anormal [ 84/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 76661
+nur anormal [ 85/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 65609
+nur anormal [ 86/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 70624
+nur anormal [ 87/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 52326
+nur anormal [ 88/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 63004
+nur anormal [ 89/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 58602
+nur anormal [ 90/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 73716
+nur anormal [ 91/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 71987
+nur anormal [ 92/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 32825
+nur anormal [ 93/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 71211
+nur anormal [ 94/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 54828
+nur anormal [ 95/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 60931
+nur anormal [ 96/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 71144
+nur anormal [ 97/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 66868
+nur anormal [ 98/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 64282
+nur anormal [ 99/103] arg_high:   normal, pred:                          [[ 0.  1.]],Heatmap is empty; sum pooled_grads: 0; sum layer out: 56302
