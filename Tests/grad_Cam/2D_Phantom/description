@@ -1,0 +1,2 @@
+Two models were created and trained wiith phantom data. Both ca. 99,9 accuracy. One is binary the other is categorical(cat).
+Three grad_cam tests were applied. Description in each folder. 

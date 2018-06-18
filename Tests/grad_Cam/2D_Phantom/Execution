@@ -1,0 +1,51 @@
+import numpy as np
+import vis_keras as vk
+import vis_keras.vis_core as vc
+import vis_keras.vis_utils.generator as gt
+import matplotlib.pyplot as plt
+from keras.models import load_model
+
+# model imports
+cat_phantom = load_model('cattegorical_phantom.h5')
+
+bin_phantom = load_model('/home/jakob/bachelor/Tests/grad_Cam/2D_Phantom/Model/classifier.h5')
+
+# function for calling grad_cam with a generator
+from copy import deepcopy
+def f(gen, model, arg='pos', cn=['normal'], name='test', ca=None):
+    count=0
+    h_stack=[]
+    lenn=gen.__len__()
+    le=(16*gen.__len__())-9
+    for i in range(lenn):
+        a = gen.__getitem__(i)
+        for l in a[0]:
+            t=deepcopy(l)
+            t = np.expand_dims(t, axis=0)
+            print('\r%7s [%3i/%3i] ' % (name,count, le), end='')
+            b = vk.vis_core.grad_cam(model,t,out=arg, class_names=cn, class_arg=ca)
+            h_stack.append(b)
+
+            count += 1
+    return h_stack
+
+# generator init
+gen_cat_normal = gt.generator('/home/jakob/bachelor/Data/2D/PhantomData/ValidationSet/0_normal', batch_size=16, target_size = (126, 126), shuffle=False)
+Init 2D generator
+Found 100 images belonging to 1 classes.
+
+gen_cat_abnormal = gt.generator('/home/jakob/bachelor/Data/2D/PhantomData/ValidationSet/1_anormal', batch_size=16, target_size = (126, 126), shuffle=False)
+Init 2D generator
+Found 100 images belonging to 1 classes.
+
+gen_bin_normal = gt.generator('/home/jakob/bachelor/Data/2D/PhantomData/ValidationSet/0_normal', batch_size=16, target_size = (126, 126), shuffle=False)
+Init 2D generator
+Found 100 images belonging to 1 classes.
+
+gen_bin_anormal = gt.generator('/home/jakob/bachelor/Data/2D/PhantomData/ValidationSet/1_anormal', batch_size=16, target_size = (126, 126), shuffle=False)
+Init 2D generator
+Found 100 images belonging to 1 classes.
+
+After that call f() with test config --> Subfolder T1, Tx
+
+
