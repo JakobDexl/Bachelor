@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri Jun 15 08:52:07 2018
-
+The generator class is a fork from the official keras library. The loading functions
+were modified to support 3D medical formats.
 @author: jakob
 """
 import os
@@ -10,7 +11,7 @@ import threading
 import numpy as np
 from copy import deepcopy
 from abc import abstractmethod
-from . import io as vio
+from . import io as  vio
 
 class Sequence(object):
     """Base object for fitting to a sequence of data, such as a dataset.

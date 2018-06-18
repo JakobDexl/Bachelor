@@ -18,17 +18,61 @@ from . import vis_utils as vu
 
 
 def activations(model, img_tensor):
-
+	'''
+	Returns every activationmap for given model and input tensor
+    # Arguments
+        model:    	 Keras model
+		img_tensor:  Image as tensor
+    # Returns
+        activations: Activationmaps
+	'''
     # getting layer outputs, init new model
     layer_outputs = [layer.output for layer in model.layers[:]]
     activation_model = models.Model(inputs=model.input, outputs=layer_outputs)
     activations = activation_model.predict(img_tensor)
 
     return activations
+	
+	
+def filters(model, layer=None, layer_class='conv'):
+	'''
+	Returns neuron weights from given model and specified layer/layertype
+    # Arguments
+        model:    	 Keras model
+		layer:  	 Layer by default first one
+		layer_class: Specify layer type e.g 'conv' (convlutional layers) or 'core' (dense layers)
+    # Returns
+        weights: Weights
+	'''
+    # find first 'conv' by default
+    # otherwise name prefered layer
+    if layer is None:
+        first_conv = lambda x: vu.model_helper.count_same(x, layer_class) [1] [0]
+        first_conv_count = first_conv(model)
+    else:
+        first_conv = lambda x: vu.model_helper.count_same(x, layer_class) [1] [layer+1]
+        first_conv_count = first_conv(model)
+    # get weights
+    weights = model.layers[first_conv_count].get_weights()[0]
+    # plot if 2d
+    # vu.plot.plot_tensor(weights, weights=True,cmap = 'gray')
+    model.get_weights()
+	
+    return weights
 
 
 def grad_cam(model, img_tensor, class_arg=None, class_names=None, out='pos'):
-
+	'''
+	Execute grad_cam for given model and input tensor. Special parameter are provided
+    # Arguments
+        model:    	 Keras model
+		img_tensor:  Image as tensor
+		class_arg:
+		class_names:
+		out:
+    # Returns
+        Heatmap :    Heatmap for given parameter
+	'''
     # Decide 2D/3D and predict output
     tensor_len = len(model.input_shape)
     preds = model.predict(img_tensor)
@@ -45,7 +89,7 @@ def grad_cam(model, img_tensor, class_arg=None, class_names=None, out='pos'):
     last_conv_name = last_conv(model)
     last_conv_layer = model.get_layer(last_conv_name)
 
-    # Get gradient tensor (per channel), mean to get gradient for each map
+    # Get gradient tensor (per channel), mean(global average pooling) to get gradient for each map
     grads = K.gradients(brain_output, last_conv_layer.output)[0]
 
     if tensor_len is 4:
@@ -98,12 +142,24 @@ def grad_cam(model, img_tensor, class_arg=None, class_names=None, out='pos'):
               (np.sum(pooled_grads_value), np.sum(pre_out)))
 
     heatmap = vu.preprocess.np_normalize(heatmap)
+	
     return heatmap
 
 
 def gradient_ascent(model, img=None, filter_index=0, layer_name=None,
                     iterations=100, cancel_iterator=2):
-
+	'''
+	Executes a gradient ascent
+    # Arguments
+        model:    	 	  Keras model
+		img:  		  	  Image as starting point for loss calculation
+		filter_index:	  Specify filter index
+		layer_name:		  Specify layer name
+		cancel_iteratior: Stop condition for loss calculation. If this count is reached 
+						  whithout changes in loss image a break oocurs
+    # Returns
+        img:    		  Calculated image
+	'''
     model_input_size = vu.model_helper.model_indim(model)
     if model_input_size is 2:
         img_h = model.input_shape[1]
@@ -195,11 +251,23 @@ def gradient_ascent(model, img=None, filter_index=0, layer_name=None,
     img = input_img_data[0]
     img = vu.preprocess.deprocess_image(img)
     img = np.squeeze(img)
+	
     return img
 
 
-def occlusion(model, img_tensor, stride=None, kernel=None, k_value=0):
-
+def occlusion(model, img_tensor, stride, kernel, k_value=0):
+	'''
+	Occlusion experiment which systematically occludes a part of a given input image
+	and feeds it into the given model. Prediction is measured and copied into the Heatmap
+    # Arguments
+        model:    	 Keras model
+		img_tensor:  Image as tensor
+		stride:		 Strdide have to be smaller smaller than kernel+1
+		kernel:		 Size of kernel have to be smaller than image size
+		k_value:	 Int value for colour of patch e.g. 0 is black
+    # Returns
+        Heatmap :    Heatmap for given parameter
+	'''
     if not vu.model_helper.model_tensor_test(model, img_tensor):
         print('Failed: Model/tensor shape not same')
         return
@@ -283,21 +351,5 @@ def occlusion(model, img_tensor, stride=None, kernel=None, k_value=0):
 #        plt.xticks([])
 #        plt.yticks([])
 #        plt.show
+
     return heatmap
-
-
-def filters(model, layer=None, layer_class='conv'):
-    # find first 'conv' by default
-    # otherwise name prefered layer
-    if layer is None:
-        first_conv = lambda x: vu.model_helper.count_same(x, layer_class) [1] [0]
-        first_conv_count = first_conv(model)
-    else:
-        first_conv = lambda x: vu.model_helper.count_same(x, layer_class) [1] [layer+1]
-        first_conv_count = first_conv(model)
-    # get weights
-    weights = model.layers[first_conv_count].get_weights()[0]
-    # plot if 2d
-    # vu.plot.plot_tensor(weights, weights=True,cmap = 'gray')
-    model.get_weights()
-    return weights

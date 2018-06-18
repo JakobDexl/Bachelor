@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed May 30 15:29:17 2018
-
+This file contains functions for input and output. For medical files you need some 
+additional packages (If not installed, functionality is reduced).
 @author: jakpo_000
 """
 from copy import deepcopy
@@ -174,7 +175,7 @@ def load(path, target_size=None):
     through whole directories and searches for supported formats. Supported
     formats are specified through target_size or in case of single size the
     format can be specified after the search process.
-    Not recommanded for huge batches bigger than 100. Therefore use instead
+    Not recommended for huge batches bigger than 100. Therefore use instead
     the generator class.
     # Arguments
         path:        Path with filename as string

@@ -33,6 +33,12 @@ def normalize(x):
 
 
 def np_normalize(img):
+	'''
+    # Arguments
+        img:    Image
+    # Returns
+        img:    Normalized image
+	'''
     thres = 1e-07
     tmp = np.sqrt(np.mean(np.square(img)))
     if tmp == 0:
@@ -40,6 +46,12 @@ def np_normalize(img):
     return img / tmp
 
 def np_clip(img):
+	'''
+    # Arguments
+        img:    Image
+    # Returns
+        img:    Standardized image (between 0 and 1)
+	'''
     ma = np.max(img)
     mi = np.min(img)
     img = (img-mi)/(ma-mi)
