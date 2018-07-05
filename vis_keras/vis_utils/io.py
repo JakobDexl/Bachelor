@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed May 30 15:29:17 2018
-This file contains functions for input and output. For medical files you need some 
-additional packages (If not installed, functionality is reduced).
+This file contains functions for input and output. For medical files you need
+some additional packages (If not installed, functionality is reduced).
 @author: jakpo_000
 """
 from copy import deepcopy
 import os
 import numpy as np
 from scipy.ndimage import zoom
+from keras.models import load_model
 # from time import time
 # import preprocess as prep
 
@@ -30,10 +31,46 @@ except ImportError:
     print('SimpleITK not found! Functions mha are not available')
     sitk = None
 
+try:
+    import h5py
+except ImportError:
+    h5py = None
+
 from keras.preprocessing import image
 
 _FORMATS2D = ['.png', '.jpg', '.jpeg', '.bmp', '.ppm']
 _FORMATS3D = ['.nii', '.mha']
+
+
+def transfer_load(filepath):
+    '''
+    Function for loading models with optimizer from keras version 2.0.8 into
+    keras version 2.1.5.
+    # Arguments
+        filepath:   Path to *.h5 model
+    # Returns
+        model:      Transfered model
+    '''
+    hf = h5py.File(filepath, mode='r')
+    model = load_model(filepath)
+    print('Ignore warning. This is a workaround!')
+    new_weights = model.optimizer.get_weights()
+
+    optimizer_weights_group = hf['optimizer_weights']
+    optimizer_weight_names = [n.decode('utf8') for n in
+                              optimizer_weights_group.attrs['weight_names']]
+
+    count = 0
+    for i in optimizer_weight_names:
+        tmp = 'optimizer_weights/'+i
+        opt_val = hf[tmp].value
+        new_weights[count] = opt_val
+        count += 1
+
+    model.optimizer.set_weights(new_weights)
+    hf.close()
+
+    return model
 
 
 def cv_load_2d(img_path, target_size=None):
@@ -116,13 +153,14 @@ def nii(img_path, target_size=None):
     img_path = convert_path(img_path)
     img = nib.load(img_path)
     tmp = np.array(img.dataobj)
+    return tmp
     if target_size is not None:
-        arr = refit(tmp, target_size)
-    arr /= 255.
+        tmp = refit(tmp, target_size)
+    tmp /= 255.
     # arr = np.expand_dims(arr, axis=-1)
     # arr = np.expand_dims(arr, axis=0)
     # print('nii_time: %f' % (time()-start_time))
-    return arr
+    return tmp
 
 
 def pil_load(path, target_size=None):

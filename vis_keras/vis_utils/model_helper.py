@@ -6,13 +6,14 @@ Utilities for keras Sequential models
 """
 from copy import deepcopy
 
+
 def make_tuple(size, dim=2):
     for i in range(dim-1):
-        size = ((size),+size)
+        size = (size + size)
     return size
 
 
-def possible_kernel_stride(size, dim=2):
+def possible_kernel_stride(size, dim=2, plot=False):
     if not isinstance(size, tuple):
         size = make_tuple(size, dim)
 
@@ -36,18 +37,19 @@ def possible_kernel_stride(size, dim=2):
     final = []
     for i in possible:
 
-        res=1
+        res = 1
         for dim in size:
             res *= ((dim-i[0])/i[1])+1
         tmp = list(i)
-        tmp.insert(0,res)
-        tmp= tuple(tmp)
+        tmp.insert(0, res)
+        tmp = tuple(tmp)
         final.append(tmp)
 
     final.sort(reverse=True)
-    for element in final:
-        print('Resolution: %10i, Kernel: %3i, Stride: %2i' % element)
-    final.insert(0,('Resolution', 'Kernel', 'Stride'))
+    if plot:
+        for element in final:
+            print('Resolution: %10i, Kernel: %3i, Stride: %2i' % element)
+    final.insert(0, ('Resolution', 'Kernel', 'Stride'))
     return final
 
 

@@ -56,9 +56,10 @@ class Model_explorer():
             self.t_size = self.input_shape[1], self.input_shape[2]
         elif self.input_image_dim is 3:
             self.t_size = self.input_shape[1], self.input_shape[2], self.input_shape[3]
-        self.num_test_obj = 0
-        self.active_object = None
-        self.generator = None
+
+        self.active_object = False
+        self.object = None
+        self.object_name = None
         self.summary = lambda: self.model.summary()
         Model_explorer.info(self)
 
@@ -68,82 +69,92 @@ class Model_explorer():
         print('Path_name: %s' % self.path_name)
         print('Input is %s with shape %s' % (self.input_image_str, self.t_size))
 
-    def set_test_object(self, img_path, name=None):
-        if name is None:
-            count = self.num_test_obj
-            name = 'Test_object_'+ str(self.name) + str(count)
-        self.active_object, self.path_str = vu.io.load(img_path, Model_explorer.t_size)
+
+    def set_image_from_path(self, img_path, name=None):
+        self.object_name = name
+        if self.object_name is None:
+            self.object_name = 'unnamed'
+
+        self.object, self.path_str = vu.io.ext_load(img_path, Model_explorer.t_size)
+        self.active_object = True
+
+    def set_image_from_array(self, array, name=None):
+        ## check size
+        self.object_name = name
+        if self.object_name is None:
+            self.object_name = 'unnamed'
+
+        self.object = array
+        self.active_object = True
 
     def filters(self):
         """
         shows the first conv layer kernels
         """
-        if self.active_object is None:
-           print('Error! No test object found, set first')
-           return
+        if self.active_object is False:
+            print('Error! No test object found, set first')
+            return
 
         weights = vc.filters(self.model)
+        return weights
         #vu.plot.plot_tensor(weights, weights=True, cmap='gray')
 
-    def activations(self, plot=True, ):
-        if self.active_object is None:
-           print('Error! No test object found, set first')
-           return
-        return vc.activations(self.model, self.active_object)
-        #vu.plot.plot_tensor(a[2])
+
+    def activations(self, plot=True, layer=0):
+        if self.active_object is False:
+            print('Error! No test object found, set first')
+            return
+
+        else:
+            activation = vc.activations(self.model, self.object)
+            if plot:
+                if self.input_image_dim is 3:
+                    vu.plot.plot_5dtensor(activation[layer])
+                elif self.input_image_dim is 2:
+                    vu.plot.plot_tensor(activation[layer])
+
+            return activation
+
+    def occ_info(self):
+        vu.model_helper.possible_kernel_stride(self.t_size, plot=True)
+
+    def occlusion(self, kernel=None, stride=None):
+        if (kernel or stride) is None:
+            combinations = vu.model_helper.possible_kernel_stride(self.t_size)
+            le = len(combinations)
+            le = int(le/2)
+            kernel = combinations[le][1]
+            stride = combinations[le][2]
+            print('Kernel %i and stride %i were choosed automatically!')
+        heatmap = vc.occlusion(self.model, self.object, stride, kernel)
+        return heatmap
 
     def grad_cam(self, save_imposed=False, plot_first=True):
 
         if self.active_object is None:
-           print('Error! No test object found, set first')
-           return
+            print('Error! No test object found, set first')
+            return
 
-        hstack = []
-
-        if self.generator is not None:
-            count=0
-            tmp=[]
-            le=(16*gen.__len__())-9
-            for i in range(1):
-                a = gen.__getitem__(i)
-                for l in a[0]:
-                    t=deepcopy(l)
-                    t = np.expand_dims(t, axis=0)
-                    b = vk.vis_core.grad_cam(model,t,out=arg)
-                    h_stack.append(b)
-                    print('\r[%i/%i] ' % (count, le), end='')
-                    count += 1
-        else:
-            for i in range(self.batch.shape[0]):
-                # tmp = self.batch[i]
-                tmp = np.expand_dims(self.batch, axis=0)
-                heatmap = vc.grad_cam(self.model, tmp[:, i])
-                hstack.append(heatmap)
-
-        if plot_first is True:
-            plt.matshow(hstack[0])
+        heatmap = vc.grad_cam(self.model, self.object)
 
         if save_imposed:
-            for element, p_str in zip(hstack, self.path_str):
-
-                base = os.path.basename(p_str)
+                base = os.path.basename(self.path_str)
                 base = os.path.splitext(base)[0]
-                name_str = 'Heatmap-'+ base
-                vu.plot.superimpose(element, p_str, save=True, name=name_str)
+                name_str = 'Heatmap-'+ self.object_name
+                vu.plot.superimpose(heatmap, self.path_str, save=True, name=name_str)
                 print(1)
+        return heatmap
 
-    def grad_ascent(self):
+    def grad_ascent(self, filter_index=0 ):
         # ga = vc.gradient_ascent(self.model)
-        stack = []
 
-        for i in range(3):
             # stack.append(n_max(model, filter_index=i))
-            stack.append(vc.gradient_ascent(self.model, filter_index=i))
-
+        maximized=vc.gradient_ascent(self.model, filter_index, layer_name=None)
         #vu.plot.plot_stack(stack)
+        return maximized
 
     def predict(self):
-        pred = self.model.predict(self.batch)
+        pred = self.model.predict(self.object)
         return pred
 
 

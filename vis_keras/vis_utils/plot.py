@@ -6,11 +6,16 @@ Created on Wed May 30 15:31:53 2018
 """
 from copy import deepcopy
 from math import sqrt
-import cv2
-
 import numpy as np
 import matplotlib.pylab as plt
+from .import io
+from .import preprocess
 
+try:
+    import cv2
+except ImportError:
+    print('opencv not found! Functions cv_load, superimpose are not available')
+    cv2 = None
 
 def heatmap(stack, model, plot=True):
     pic_list = deepcopy(stack)
@@ -37,6 +42,38 @@ def heatmap(stack, model, plot=True):
     return heatmap
 
 
+def plot_3d(volume, axis=1, cmap='viridis'):
+
+    volume = preprocess.np_clip(volume)
+    volume = np.uint8(255*volume)
+    shape=volume.shape
+    le = shape[axis]
+    x = 5
+    y = (le//x)+1
+    plt.figure(figsize=(11, y+(y)))
+
+    for c in range(le):
+        if axis == 0:
+            image = volume[c,:,:]
+
+        if axis == 1:
+            image = volume[:,c,:]
+
+        if axis == 2:
+            image = volume[:,:,c]
+
+        plt.subplot(y, x, c+1)
+        plt.imshow(image, cmap, clim=(np.min(volume), np.max(volume)))
+        plt.title('%s von %s' % (c+1, le))
+        plt.xticks([])
+        plt.yticks([])
+
+    plt.subplots_adjust(bottom=0.1, right=0.8, top=0.9)
+    cax = plt.axes([0.85, 0.1, 0.075, 0.8])
+    plt.colorbar(cax=cax)
+    plt.show()
+
+
 def plot_stack(liste, cmap='viridis'):
     length = len(liste)
     x = 5
@@ -47,6 +84,39 @@ def plot_stack(liste, cmap='viridis'):
         plt.subplot(y, x, c+1)
         plt.imshow(liste[c], cmap, clim=(np.min(liste), np.max(liste)))
         plt.title('%s von %s' % (c+1, length))
+        plt.xticks([])
+        plt.yticks([])
+
+    plt.subplots_adjust(bottom=0.1, right=0.8, top=0.9)
+    cax = plt.axes([0.85, 0.1, 0.075, 0.8])
+    plt.colorbar(cax=cax)
+    plt.show()
+
+
+def plot_5dtensor(tensor, axis=2, slices=None, cmap='gray'):
+    le = tensor.shape[-1]
+
+    x = 5
+    y = (le//x)+1
+    plt.figure(figsize=(11, y+(y)))
+
+    if slices is None:
+        shape = tensor.shape[-2]
+        slices = int(shape/2)
+
+    for c in range(le):
+        if axis == 0:
+            image = tensor[0, slices, :, :, c]
+
+        if axis == 1:
+            image = tensor[0, :, slices, :, c]
+
+        if axis == 2:
+            image = tensor[0, :, :, slices, c]
+
+        plt.subplot(y, x, c+1)
+        plt.imshow(image, cmap)  # , clim=(np.min(), np.max(volume)))
+        plt.title('%s von %s' % (c+1, le))
         plt.xticks([])
         plt.yticks([])
 
@@ -81,15 +151,46 @@ def plot_tensor(tensor, weights=False, cmap='gray'):
     plt.show()
 
 
-def superimpose(heatmap, img_path, save=True, name='Heatmap'):
-    img = cv2.imread(img_path)
-    heatmap = cv2.resize(heatmap, (img.shape[1], img.shape[0]))
-    heatmap = np.uint8(255*heatmap)
-    heatmap = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET)
-    superimposed = heatmap * 0.4 + img
-    # if save:
-    cv2.imwrite('/home/jakob/bachelor/Tests/grad_Cam/2D_Phantom/Data/%s.jpg' % name, superimposed)
+def superimpose(heatmap, img_path, dest_path, name='Heatmap', axis=1):
+    img = io.ext_load(img_path)
+
+    shape = img.shape[1:-1]
+
+
+    if len(shape) == 2:
+        heatmap = cv2.resize(heatmap, shape)
+        heatmap = np.uint8(255*heatmap)
+        heatmap = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET)
+        superimposed = heatmap * 0.4 + img
+        cv2.imwrite(dest_path + '%s.jpg' % name, superimposed)
+
     # plt.imshow(superimposed)
+    else:
+        heatmap = io.refit(heatmap, shape)
+
+        #heatmap = np.uint8(255*heatmap)
+        for i in range(shape[axis]):
+            if axis == 0:
+                image = heatmap[i,:,:]
+                o_image = img[0,i,:,:,:]
+            if axis == 1:
+                image = heatmap[:,i,:]
+                o_image = img[0,:,i,:,:]
+            if axis == 2:
+                image = heatmap[:,:,i]
+                o_image = img[0,:,:,i,:]
+
+            image = preprocess.np_clip(image)
+            o_image = preprocess.np_clip(o_image)
+            image = np.uint8(255*image)
+            o_image = np.uint8(255*o_image)
+            image = cv2.applyColorMap(image, cv2.COLORMAP_JET)
+
+            cube = np.dstack((o_image,o_image,o_image))
+            superimposed = (image * 0.4) + cube
+
+            cv2.imwrite(dest_path + '%s_%i.jpg' % (name, i), superimposed)
+
 
 
 '''
