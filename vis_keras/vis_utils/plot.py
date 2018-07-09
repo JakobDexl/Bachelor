@@ -152,7 +152,7 @@ def plot_tensor(tensor, weights=False, cmap='gray'):
 
 
 def superimpose(heatmap, img_path, dest_path, name='Heatmap', axis=1):
-    img = io.ext_load(img_path)
+    img = io.ext_load(img_path, target_size=(128,128,128))
 
     shape = img.shape[1:-1]
 

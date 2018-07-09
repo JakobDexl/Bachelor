@@ -136,7 +136,7 @@ class Model_explorer():
                                k_value=colour)
         if plot:
                 if self.input_image_dim is 3:
-                    vu.plot.plot_5dtensor(heatmap)
+                    vu.plot.plot_3d(heatmap)
                 elif self.input_image_dim is 2:
                     vu.plot.plot_tensor(heatmap)
         return heatmap
@@ -164,12 +164,12 @@ class Model_explorer():
                 vu.plot.plot_tensor(heatmap)
         return heatmap
 
-    def grad_ascent(self, img=True, filter_index=0, layer=-1, plot=True):
+    def grad_ascent(self, input_image=True, filter_index=0, layer=-1, plot=True):
         # ga = vc.gradient_ascent(self.model)
         last_conv = lambda x: vu.model_helper.count_same(x, 'conv')[-2][layer]
         name = last_conv(self.model)
             # stack.append(n_max(model, filter_index=i))
-        if img:
+        if input_image:
             input_image = self.object
         maximized=vc.gradient_ascent(self.model, img=input_image,
                                      filter_index=filter_index,

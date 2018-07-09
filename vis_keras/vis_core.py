@@ -90,7 +90,7 @@ def grad_cam(model, img_tensor, class_arg=0, class_names=None, out='pos'):
     # Get output tensor for specified class, find last conv layer name
     brain_output = model.output[:, number]
     last_conv = lambda x: vu.model_helper.count_same(x, 'conv') [-2] [-1]
-    last_conv_name = 'conv3d_3'#last_conv(model)
+    last_conv_name = last_conv(model)
     last_conv_layer = model.get_layer(last_conv_name)
     print(last_conv_name)
     # Get gradient tensor (per channel), mean(global average pooling) to get
@@ -174,7 +174,7 @@ def gradient(model, img, output_index=0):
 
 
 def gradient_ascent(model, img=None, filter_index=0, layer_name=None,
-                    iterations=100, cancel_iterator=10):
+                    iterations=1000, cancel_iterator=10):
     '''
     Executes a gradient ascent
     # Arguments
@@ -283,7 +283,7 @@ def gradient_ascent(model, img=None, filter_index=0, layer_name=None,
     return img
 
 
-def occlusion(model, img_tensor, stride, kernel, k_value=1):
+def occlusion(model, img_tensor, stride, kernel, k_value=0.5):
     '''
     Occlusion experiment which systematically occludes a part of a given input
     image and feeds it into the given model. Prediction is measured and copied

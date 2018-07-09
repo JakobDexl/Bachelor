@@ -158,7 +158,7 @@ def nii(img_path, target_size=None):
     if target_size is not None:
         arr = refit(arr, target_size)
 
-    #arr /= np.max(arr)
+    arr /= np.max(arr)
     # arr = np.expand_dims(arr, axis=-1)
     # arr = np.expand_dims(arr, axis=0)
     # print('nii_time: %f' % (time()-start_time))
