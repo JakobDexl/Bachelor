@@ -62,7 +62,7 @@ def filters(model, layer=None, layer_class='conv'):
     return weights
 
 
-def grad_cam(model, img_tensor, class_arg=None, class_names=None, out='pos'):
+def grad_cam(model, img_tensor, class_arg=0, class_names=None, out='pos'):
     '''
     Execute grad_cam for given model and input tensor. Special parameter are
     provided
@@ -90,12 +90,15 @@ def grad_cam(model, img_tensor, class_arg=None, class_names=None, out='pos'):
     # Get output tensor for specified class, find last conv layer name
     brain_output = model.output[:, number]
     last_conv = lambda x: vu.model_helper.count_same(x, 'conv') [-2] [-1]
-    last_conv_name = last_conv(model)
+    last_conv_name = 'conv3d_3'#last_conv(model)
     last_conv_layer = model.get_layer(last_conv_name)
-
+    print(last_conv_name)
     # Get gradient tensor (per channel), mean(global average pooling) to get
     # gradient for each map
     grads = K.gradients(brain_output, last_conv_layer.output)[0]
+
+    grads = grads / (np.max(grads) + K.epsilon())
+
 
     if tensor_len is 4:
         pooled_grads = K.mean(grads, axis=(0, 1, 2))
@@ -139,7 +142,7 @@ def grad_cam(model, img_tensor, class_arg=None, class_names=None, out='pos'):
             print('pos, mean:%.e' % np.mean(heatmap))
         if out is 'neg':
             heatmap = np.minimum(heatmap, 0)
-            heatmap /= np.min(heatmap)-eps
+            #heatmap /= np.min(heatmap)-eps
             print('neg, mean: %.e' % np.mean(heatmap))
 
     if test == 0:
@@ -171,7 +174,7 @@ def gradient(model, img, output_index=0):
 
 
 def gradient_ascent(model, img=None, filter_index=0, layer_name=None,
-                    iterations=100, cancel_iterator=2):
+                    iterations=100, cancel_iterator=10):
     '''
     Executes a gradient ascent
     # Arguments
@@ -198,9 +201,10 @@ def gradient_ascent(model, img=None, filter_index=0, layer_name=None,
         print('Error! Input is not supported')
         return
 
-    size_image = len(img.shape)
-    input_tensor = model_input_size+2
+
     if img is not None:
+        size_image = len(img.shape)
+        input_tensor = model_input_size+2
         if (input_tensor) is not size_image:
             print('Error! Wrong input image size')
             print('\n tensor length should be %s!' % input_tensor)
@@ -271,7 +275,7 @@ def gradient_ascent(model, img=None, filter_index=0, layer_name=None,
             # some filters get stuck to 0, we can skip them
             print('break')
             break
-
+    print('\n')
     img = input_img_data[0]
     img = vu.preprocess.deprocess_image(img)
     img = np.squeeze(img)

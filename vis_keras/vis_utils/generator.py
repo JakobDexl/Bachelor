@@ -13,6 +13,7 @@ import numpy as np
 from copy import deepcopy
 from abc import abstractmethod
 from . import io as  vio
+from . import preprocess
 from multiprocessing import Process, Pool
 import multiprocessing
 
@@ -118,16 +119,16 @@ class Iterator(Sequence):
         self.index_array = np.arange(self.n)
         if self.shuffle:
             self.index_array = np.random.permutation(self.n)
-            
+
     def _shuffle(self):
         arr = deepcopy(self.index_array)
        #  print('shuffle')
         self.index_array = np.random.permutation(arr)
         del(arr)
-     
+
     def set_index_array(self, arr):
         self.index_array = arr
-    
+
     def get_index_array(self):
         return self.index_array
 
@@ -362,7 +363,7 @@ class yielder(Iterator):
     """
 
     def __init__(self, directory, batch_size=3, target_size=(20, 20), shuffle=True,
-                 classes=True, seed=None, class_mode='binary', datapath=None, 
+                 classes=True, seed=None, class_mode='binary', datapath=None,
                  save=False):
 
         # Load specific
@@ -413,12 +414,12 @@ class yielder(Iterator):
 
             # dirslist = []
             path = vio.convert_path(self.directory)
-           
+
 
             for root, dirs, files in os.walk(path):
                 for file in files:
                     if vio.check_ext(file, self.formats):
-                        
+
                         tmp = os.path.join(root, file)
                         tmp = vio.convert_path(tmp)
                         self.path_str.append(tmp)
@@ -448,7 +449,7 @@ class yielder(Iterator):
                     np.save(res[0], nam)
 #            kt = int(self.samples / 4)
 #            print(kt)
-            
+
 
 #            start = time()
 
@@ -485,6 +486,11 @@ class yielder(Iterator):
             prog = i/self.samples
             print('\r[%i/%i] %.2f %%' % (i+1, self.samples, prog*100),
                   end='')
+    def save(self, save_path):
+        print('Start saveing')
+
+        np.save(save_path, self.data)
+        print('Finished saveing')
 
     def names(self):
         return self.path_str
@@ -558,14 +564,14 @@ class yielder(Iterator):
 
     def train_gen(self):
         self.activate_train()
-        pa = partial((self.get_index_array()), self.data, self.batch_size, 
+        pa = partial((self.get_index_array()), self.data, self.batch_size,
                      self.shuffle, self.seed, self.target_size, self.classes,
                      self.class_mode, self.num_classes)
         return pa
 
     def test_gen(self):
         self.activate_test()
-        pa = partial((self.get_index_array()), self.data, self.batch_size, 
+        pa = partial((self.get_index_array()), self.data, self.batch_size,
                      self.shuffle, self.seed, self.target_size, self.classes,
                      self.class_mode, self.num_classes)
         return pa
@@ -647,6 +653,8 @@ class yielder(Iterator):
         # build batch of image data
         for i, j in enumerate(index_array):
             batch_x[i] = self.data[j]
+
+
         self.classes = np.asarray(self.classes, dtype=np.float32)
         # build batch of labels
         if self.class_mode == 'input':
@@ -667,10 +675,10 @@ class yielder(Iterator):
         return batch_x, batch_y
 
 class partial(Iterator):
-    
-    def __init__(self, index_array, data, batch_size ,shuffle, seed, 
+
+    def __init__(self, index_array, data, batch_size ,shuffle, seed,
                  target_size, classes, class_mode, num_classes ):
-        
+
         n = len(index_array)
         self.samples = n
         self.batch_size = batch_size
@@ -684,7 +692,7 @@ class partial(Iterator):
         super(partial, self).__init__(n,batch_size,shuffle,seed)
         self.set_index_array(index_array)
         self._shuffle()
-        
+
     def len(self):
 
         return self.samples
@@ -725,4 +733,3 @@ class partial(Iterator):
             return batch_x
 
         return batch_x, batch_y
-      

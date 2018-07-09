@@ -10,6 +10,7 @@ import os
 import numpy as np
 from scipy.ndimage import zoom
 from keras.models import load_model
+import gc
 # from time import time
 # import preprocess as prep
 
@@ -152,15 +153,19 @@ def nii(img_path, target_size=None):
         return
     img_path = convert_path(img_path)
     img = nib.load(img_path)
-    tmp = np.array(img.dataobj)
-    return tmp
+    arr = np.asarray(img.dataobj).astype(np.float32)
+    img.uncache()
     if target_size is not None:
-        tmp = refit(tmp, target_size)
-    tmp /= 255.
+        arr = refit(arr, target_size)
+
+    #arr /= np.max(arr)
     # arr = np.expand_dims(arr, axis=-1)
     # arr = np.expand_dims(arr, axis=0)
     # print('nii_time: %f' % (time()-start_time))
-    return tmp
+    img = None
+
+    gc.collect()
+    return arr
 
 
 def pil_load(path, target_size=None):

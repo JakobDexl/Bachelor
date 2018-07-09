@@ -74,8 +74,8 @@ class Model_explorer():
         self.object_name = name
         if self.object_name is None:
             self.object_name = 'unnamed'
-
-        self.object, self.path_str = vu.io.ext_load(img_path, Model_explorer.t_size)
+        self.path_str = img_path
+        self.object = vu.io.ext_load(img_path, target_size=self.t_size)
         self.active_object = True
 
     def set_image_from_array(self, array, name=None):
@@ -87,20 +87,26 @@ class Model_explorer():
         self.object = array
         self.active_object = True
 
-    def filters(self):
+    def filters(self, plot=True):
         """
         shows the first conv layer kernels
         """
         if self.active_object is False:
             print('Error! No test object found, set first')
             return
-
         weights = vc.filters(self.model)
+        if plot:
+                if self.input_image_dim is 3:
+                    vu.plot.plot_5dtensor(weights)
+                elif self.input_image_dim is 2:
+                    vu.plot.plot_tensor(weights)
+
+
         return weights
         #vu.plot.plot_tensor(weights, weights=True, cmap='gray')
 
 
-    def activations(self, plot=True, layer=0):
+    def activations(self, layer=0, plot=True):
         if self.active_object is False:
             print('Error! No test object found, set first')
             return
@@ -118,7 +124,7 @@ class Model_explorer():
     def occ_info(self):
         vu.model_helper.possible_kernel_stride(self.t_size, plot=True)
 
-    def occlusion(self, kernel=None, stride=None):
+    def occlusion(self, kernel=None, stride=None, colour=0.5, plot=True):
         if (kernel or stride) is None:
             combinations = vu.model_helper.possible_kernel_stride(self.t_size)
             le = len(combinations)
@@ -126,31 +132,54 @@ class Model_explorer():
             kernel = combinations[le][1]
             stride = combinations[le][2]
             print('Kernel %i and stride %i were choosed automatically!')
-        heatmap = vc.occlusion(self.model, self.object, stride, kernel)
+        heatmap = vc.occlusion(self.model, self.object, stride, kernel,
+                               k_value=colour)
+        if plot:
+                if self.input_image_dim is 3:
+                    vu.plot.plot_5dtensor(heatmap)
+                elif self.input_image_dim is 2:
+                    vu.plot.plot_tensor(heatmap)
         return heatmap
 
-    def grad_cam(self, save_imposed=False, plot_first=True):
+    def grad_cam(self, class_arg=None, values='pos', save_imposed=False,
+                 destination_path='/', plot=True):
 
         if self.active_object is None:
             print('Error! No test object found, set first')
             return
 
-        heatmap = vc.grad_cam(self.model, self.object)
+        heatmap = vc.grad_cam(self.model, self.object, class_arg, out=values)
 
         if save_imposed:
-                base = os.path.basename(self.path_str)
-                base = os.path.splitext(base)[0]
-                name_str = 'Heatmap-'+ self.object_name
-                vu.plot.superimpose(heatmap, self.path_str, save=True, name=name_str)
-                print(1)
+            base = os.path.basename(self.path_str)
+            base = os.path.splitext(base)[0]
+            name_str = 'Grad-CAM-Heatmap-'+ self.object_name
+            vu.plot.superimpose(heatmap, self.path_str, destination_path,
+                                name=name_str)
+            print(1)
+        if plot:
+            if self.input_image_dim is 3:
+                vu.plot.plot_3d(heatmap)
+            elif self.input_image_dim is 2:
+                vu.plot.plot_tensor(heatmap)
         return heatmap
 
-    def grad_ascent(self, filter_index=0 ):
+    def grad_ascent(self, img=True, filter_index=0, layer=-1, plot=True):
         # ga = vc.gradient_ascent(self.model)
-
+        last_conv = lambda x: vu.model_helper.count_same(x, 'conv')[-2][layer]
+        name = last_conv(self.model)
             # stack.append(n_max(model, filter_index=i))
-        maximized=vc.gradient_ascent(self.model, filter_index, layer_name=None)
+        if img:
+            input_image = self.object
+        maximized=vc.gradient_ascent(self.model, img=input_image,
+                                     filter_index=filter_index,
+                                     layer_name=name)
         #vu.plot.plot_stack(stack)
+        if plot:
+            if self.input_image_dim is 3:
+                vu.plot.plot_3d(maximized)
+#            elif self.input_image_dim is 2:
+#                vu.plot.plot_tensor(maximized)
         return maximized
 
     def predict(self):

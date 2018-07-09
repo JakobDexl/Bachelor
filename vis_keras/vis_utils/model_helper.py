@@ -111,7 +111,6 @@ def model_tensor_test(model, tensor):
     else:
         return True
 
-
 def model_indim(model):
     shape = model.input_shape
     shape_l = len(shape)
@@ -179,3 +178,9 @@ def count_same(model, layer_name='conv'):
         pos_count += 1
 
     return count, pos, name, layer_type
+
+def num_conv_filter(model, idx):
+    conv = lambda x: count_same(x, 'conv')[1][idx]
+    place = conv(model)
+    num = model.layers[place].output_shape[-1]
+    return num
