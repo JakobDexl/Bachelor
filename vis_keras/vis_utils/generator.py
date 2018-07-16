@@ -448,7 +448,7 @@ class yielder(Iterator):
                     nam = res[1] + '.npy'
                     np.save(res[0], nam)
 
-             print(self.dif_classes,self.classes,self.cla)
+            print(self.dif_classes,self.classes)
 #            kt = int(self.samples / 4)
 #            print(kt)
 

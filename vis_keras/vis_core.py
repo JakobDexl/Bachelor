@@ -61,8 +61,10 @@ def filters(model, layer=None, layer_class='conv'):
 
     return weights
 
+def bias(model):
+    return model.layers.get_weights()[1]
 
-def grad_cam(model, img_tensor, class_arg=0, class_names=None, out='pos'):
+def grad_cam(model, img_tensor, class_arg=None, class_names=None, out='pos', layer=-1):
     '''
     Execute grad_cam for given model and input tensor. Special parameter are
     provided
@@ -89,7 +91,7 @@ def grad_cam(model, img_tensor, class_arg=0, class_names=None, out='pos'):
 
     # Get output tensor for specified class, find last conv layer name
     brain_output = model.output[:, number]
-    last_conv = lambda x: vu.model_helper.count_same(x, 'conv') [-2] [-1]
+    last_conv = lambda x: vu.model_helper.count_same(x, 'conv') [-2] [layer]
     last_conv_name = last_conv(model)
     last_conv_layer = model.get_layer(last_conv_name)
     print(last_conv_name)
@@ -131,7 +133,7 @@ def grad_cam(model, img_tensor, class_arg=0, class_names=None, out='pos'):
 
     eps = 1e-25
     if class_names is None:
-        print('arg: %i, pred:%.e,' % (number, preds[0][0]), end='')
+        print('arg: %i, pred:%.e,' % (number, preds[0][number]), end='')
     else:
         print('arg_high: %8s, pred:%37s,' % (class_names[number], preds),
               end='')
@@ -174,7 +176,7 @@ def gradient(model, img, output_index=0):
 
 
 def gradient_ascent(model, img=None, filter_index=0, layer_name=None,
-                    iterations=1000, cancel_iterator=10):
+                    iterations=1000, cancel_iterator=40):
     '''
     Executes a gradient ascent
     # Arguments
@@ -283,7 +285,7 @@ def gradient_ascent(model, img=None, filter_index=0, layer_name=None,
     return img
 
 
-def occlusion(model, img_tensor, stride, kernel, k_value=0.5):
+def occlusion(model, img_tensor, stride, kernel, arg=0, k_value=0.5):
     '''
     Occlusion experiment which systematically occludes a part of a given input
     image and feeds it into the given model. Prediction is measured and copied
@@ -343,7 +345,7 @@ def occlusion(model, img_tensor, stride, kernel, k_value=0.5):
 
     # pred_zero = deepcopy(img_tensor[0])
     pred = model.predict(img_tensor)
-    standard_prediction = pred[0, 0]
+    standard_prediction = pred[0, arg]
 
     print('Kernel:     %s' % str(kernel))
     print('Stride:     %s' % (stride))
@@ -361,14 +363,14 @@ def occlusion(model, img_tensor, stride, kernel, k_value=0.5):
 
                 t = vu.io.to_tensor(manipul_img)
                 pred = model.predict(t)
-                heatvec[count] = pred[0, 0]
+                heatvec[count] = pred[0, arg]
                 count += 1
                 prog = (count/num_occ)*100
 
                 if (count % 1) == 0:
 
                     print('\r[%4d/%i] %.2f %%, Prediction: %f' % (count,
-                          num_occ, prog, pred[0, 0]), end='')
+                          num_occ, prog, pred[0, arg]), end='')
 
     heatmap = np.reshape(heatvec, reshape_vec)
     heatmap = heatmap - standard_prediction

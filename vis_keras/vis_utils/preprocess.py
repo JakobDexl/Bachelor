@@ -8,8 +8,14 @@ import numpy as np
 from keras import backend as K
 
 
-# util function to convert a tensor into a valid image
 def deprocess_image(x):
+    '''
+    Utility function to convert a tensor into a valid image
+    # Arguments
+        x:    Tensor
+    # Returns
+        x:    Deprocessed image
+    '''
     # normalize tensor: center on 0., ensure std is 0.1
     x -= x.mean()
     x /= (x.std() + 1e-5)
@@ -28,7 +34,13 @@ def deprocess_image(x):
 
 
 def normalize(x):
-    # utility function to normalize a tensor by its L2 norm
+    '''
+    Utility function to normalize a tensor by its L2 norm
+    # Arguments
+        x:    Tensor
+    # Returns
+        Normalized tensor
+    '''
     return x / (K.sqrt(K.mean(K.square(x))) + K.epsilon())
 
 
@@ -60,7 +72,16 @@ def np_clip(img):
     return img
 
 
-#def standardize(x):
+# draft functions
+def np_clip_2(img):
+    thres = 1e-07
+    ma = np.max(img)/2
+    ra = ma-np.min(img)
+
+    img = ((img-(ma))/(ra+thres))
+    return img
+
+# def standardize(x):
 #        """Apply the normalization configuration to a batch of inputs.
 #
 #        # Arguments

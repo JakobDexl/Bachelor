@@ -65,12 +65,23 @@ class Model_explorer():
 
     # def _get_weights_bias(model):
     def info(self):
+        '''
+        Print model information
+        '''
         print('Name: %s' % self.name)
         print('Path_name: %s' % self.path_name)
         print('Input is %s with shape %s' % (self.input_image_str, self.t_size))
 
 
     def set_image_from_path(self, img_path, name=None):
+        '''
+        Plotting specific slice of a 4D tensor in one figure
+        # Arguments
+            img_path:  Path to image
+            name:      Image name for saving options
+        # Returns
+            -
+        '''
         self.object_name = name
         if self.object_name is None:
             self.object_name = 'unnamed'
@@ -88,9 +99,13 @@ class Model_explorer():
         self.active_object = True
 
     def filters(self, plot=True):
-        """
-        shows the first conv layer kernels
-        """
+        '''
+        Shows the first conv layer kernels
+        # Arguments
+            plot:  Path to image
+        # Returns
+            weights:   All weights
+        '''
         if self.active_object is False:
             print('Error! No test object found, set first')
             return
@@ -115,24 +130,24 @@ class Model_explorer():
             activation = vc.activations(self.model, self.object)
             if plot:
                 if self.input_image_dim is 3:
-                    vu.plot.plot_5dtensor(activation[layer])
+                    vu.plot.plot_5dtensor(activation[layer], cmap='seismic') # YIOrBr
                 elif self.input_image_dim is 2:
                     vu.plot.plot_tensor(activation[layer])
 
             return activation
 
     def occ_info(self):
-        vu.model_helper.possible_kernel_stride(self.t_size, plot=True)
+        return vu.model_helper.possible_kernel_stride(self.t_size, plot=True)
 
-    def occlusion(self, kernel=None, stride=None, colour=0.5, plot=True):
+    def occlusion(self, kernel=None, stride=None, colour=0.5, arg=0, plot=True):
         if (kernel or stride) is None:
             combinations = vu.model_helper.possible_kernel_stride(self.t_size)
             le = len(combinations)
             le = int(le/2)
             kernel = combinations[le][1]
             stride = combinations[le][2]
-            print('Kernel %i and stride %i were choosed automatically!')
-        heatmap = vc.occlusion(self.model, self.object, stride, kernel,
+            #print('Kernel %i and stride %i were chosen automatically!' % (kernel, stride))
+        heatmap = vc.occlusion(self.model, self.object, stride, kernel, arg=arg,
                                k_value=colour)
         if plot:
                 if self.input_image_dim is 3:
@@ -142,13 +157,14 @@ class Model_explorer():
         return heatmap
 
     def grad_cam(self, class_arg=None, values='pos', save_imposed=False,
-                 destination_path='/', plot=True):
+                 destination_path='/', plot=True, layer=-1):
 
         if self.active_object is None:
             print('Error! No test object found, set first')
             return
 
-        heatmap = vc.grad_cam(self.model, self.object, class_arg, out=values)
+        heatmap = vc.grad_cam(self.model, self.object, class_arg, out=values,
+                              layer=layer)
 
         if save_imposed:
             base = os.path.basename(self.path_str)
@@ -169,6 +185,8 @@ class Model_explorer():
         last_conv = lambda x: vu.model_helper.count_same(x, 'conv')[-2][layer]
         name = last_conv(self.model)
             # stack.append(n_max(model, filter_index=i))
+        print(name)
+        input_image = None
         if input_image:
             input_image = self.object
         maximized=vc.gradient_ascent(self.model, img=input_image,
@@ -177,10 +195,17 @@ class Model_explorer():
         #vu.plot.plot_stack(stack)
         if plot:
             if self.input_image_dim is 3:
-                vu.plot.plot_3d(maximized)
+                middle = int((maximized.shape[-1]) / 2)
+                plt.imshow(maximized[:,:,middle])
+                #vu.plot.plot_3d(maximized)
 #            elif self.input_image_dim is 2:
 #                vu.plot.plot_tensor(maximized)
         return maximized
+
+    def gradient(self):
+        grad = vc.gradient(self.model, self.object)
+        grad = np.squeeze(grad, axis=-1)
+        return grad
 
     def predict(self):
         pred = self.model.predict(self.object)
