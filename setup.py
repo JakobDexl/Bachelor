@@ -14,8 +14,8 @@ setup(name='bachelor',
                         'matplotlib>=2.2.2',
                         'tensorflow>=1.1.0',
                         'keras>=2.1.5'],
-      extras_require =['nibabel>=2.2.1',
-                       'SimpleITK>=1.1.0'],
+     ## extras_require =['nibabel>=2.2.1',
+               ##        'SimpleITK>=1.1.0'],
  
       packages=find_packages(),
       zip_safe=False)
