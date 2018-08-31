@@ -16,4 +16,4 @@ setup(name='bachelor',
                         'keras>=2.1.5'],
  
       packages=find_packages(),
-      zip_safe=False)
+      zip_safe=True)
