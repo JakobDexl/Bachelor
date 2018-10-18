@@ -1,3 +1,0 @@
-Test for Categorical and Binary model. Grad_Cam applied on model feeded with normal and anormal images.
-Folder has results for maps with negative influence for predcted class (before Relu).
-That means: Parts in the image which have influence against predicted class are highlighted
