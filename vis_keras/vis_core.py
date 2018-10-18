@@ -2,11 +2,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri May 11 12:37:00 2018
-https://arxiv.org/pdf/1802.10508.pdf
-Brain Tumor Segmentation and Radiomics
-Survival Prediction: Contribution to the BRATS
-2017 Challenge
-@author: jakob
+
+@author: jakob dexl
 """
 # import matplotlib.pyplot as plt
 from keras import models
@@ -66,6 +63,11 @@ def bias(model):
 
 def grad_cam(model, img_tensor, class_arg=None, class_names=None, out='pos', layer=-1):
     '''
+    Method proposed by Selvaraju RR, Cogswell M, Das A et al. Grad-CAM: Visual Explanations from Deep Networks via
+    Gradient-based Localization (2017/03/21), 2017, http://arxiv.org/pdf/1610.02391
+    Implementation proposed by jacob gildenblat https://github.com/jacobgil/keras-grad-cam, MIT lic.
+    This function is adopted from: (Francois Chollet Deep Learning with Python,
+    pages 172ff, 2018, MIT lic.)
     Execute grad_cam for given model and input tensor. Special parameter are
     provided
     # Arguments
@@ -76,8 +78,6 @@ def grad_cam(model, img_tensor, class_arg=None, class_names=None, out='pos', lay
         out:
     # Returns
         Heatmap :    Heatmap for given parameter
-    This function is adopted from: (Francois Chollet Deep Learning with Python,
-    pages 172ff, 2018)
     '''
     # Decide 2D/3D and predict output
     tensor_len = len(model.input_shape)
@@ -158,6 +158,8 @@ def grad_cam(model, img_tensor, class_arg=None, class_names=None, out='pos', lay
 
 def gradient(model, img, output_index=0):
     '''
+    Excerpt from https://github.com/experiencor/deep-viz-keras Apache License, Version 2.0
+    Method proposed Springenberg JT, Dosovitskiy A, Brox T et al. Striving for Simplicity: The All Convolutional Net
     Captures the gradient from the optimizer
     # Arguments
         model:    	 	  Keras model
@@ -178,6 +180,10 @@ def gradient(model, img, output_index=0):
 def gradient_ascent(model, img=None, filter_index=0, layer_name=None,
                     iterations=1000, cancel_iterator=40):
     '''
+    Method proposed by Dumitru Erhan, Yoshua Bengio, Aaron Courville, and Pascal Vincent. Visualizing Higher-Layer
+    Features of a Deep Network. Technical Report 1341 2009
+    This function is adopted from: (Francois Chollet Deep Learning with Python,
+    pages 167ff, 2018, MIT lic.) 
     Executes a gradient ascent
     # Arguments
         model:    	 	  Keras model
@@ -287,6 +293,8 @@ def gradient_ascent(model, img=None, filter_index=0, layer_name=None,
 
 def occlusion(model, img_tensor, stride, kernel, arg=0, k_value=0.5):
     '''
+    As proposed by Zeiler MD, Fergus R. Visualizing and Understanding Convolutional Networks (2013/11/28), 2013,
+    http://arxiv.org/pdf/1311.2901
     Occlusion experiment which systematically occludes a part of a given input
     image and feeds it into the given model. Prediction is measured and copied
     into the Heatmap
